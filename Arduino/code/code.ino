@@ -2,6 +2,7 @@
 #include <DallasTemperature.h>
 
 #define DS18B20_PIN 10
+#define LUX_PIN A1
 #define READ A0
 
 OneWire oneWire(DS18B20_PIN);
@@ -22,7 +23,7 @@ void loop() {
   json += temperature();
   json += brightness() + "}";
   Serial.println(json);
-
+  
   delay(100);
   //}
 }
@@ -31,7 +32,7 @@ String temperature() {
   String json;
   sensors.requestTemperatures();
   for (byte i = 0; i < sensors.getDeviceCount(); i++) {
-    json += "'temp':{'num_sensor':" + String(i + 1) + ",'value':" + String(sensors.getTempCByIndex(i)) + "},";
+    json += String("'temp':{'num_sensor':" + String(i + 1) + ",'value':" + String(sensors.getTempCByIndex(i)) + "},");
   }
 
   return json;
@@ -39,8 +40,10 @@ String temperature() {
 
 String brightness() {
   int sens = readLED(50);
-
-  return "'light':" + String(sens) + "}";
+  String result;
+  result += "'light_sensor':" + String(analogRead(LUX_PIN)) + ",";
+  result += "'light':" + String(sens) + "}";
+  return result;
 }
 
 int readLED(int number) { // Read analog value n times and avarage over those n times
