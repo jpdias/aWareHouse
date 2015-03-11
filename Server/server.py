@@ -1,20 +1,21 @@
 import serial
 import schedule
 import time
+import json
 from flask import Flask, request
 from threading import Thread
 from influxdb import InfluxDBClient
 
 COM_PORT = 2
 BAUDRATE = 9600
-READ_THREAD = 10
-DB_HOST = 'localhost'
-DB_HOST_PORT = 8086
+READ_SENSORS_TIMER = 1
+DB_HOST = '192.168.1.73'
+DB_PORT = 8086
 DB_NAME = 'awarehouse'
 DB_PASS = 'admin'
 DB_USER = 'admin'
 
-influxdb = InfluxDBClient(DB_HOST, DB_HOST_PORT, DB_USER, DB_PASS, DB_NAME)
+influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
 
 ser = serial.Serial(COM_PORT, BAUDRATE)
 
@@ -24,9 +25,14 @@ start_time = time.time()
 
 
 def get_sensors():
-  ser.write('r')
-  json = ser.readline()
-  influxdb.write_points([json])
+  # ser.write('r')
+  json = "fixme" # ser.readline()
+  influxdb.write_points([{
+    "points": [[20.44, 30, 231]],
+    "name": "sensors",
+    "columns": ["temp1", "light_sensor", "light"]
+  }])
+
   print json
 
 
@@ -41,7 +47,7 @@ def index():
   return '<html>test</html>'
 
 if __name__ == '__main__':
-  schedule.every(READ_THREAD).seconds.do(get_sensors)
+  schedule.every(READ_SENSORS_TIMER).seconds.do(get_sensors)
   t = Thread(target=run_schedule)
   t.start()
   app.run(debug=True, use_reloader=False, host='0.0.0.0', port=5000)
