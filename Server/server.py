@@ -20,7 +20,9 @@ influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
 
 ser = serial.Serial(COM_PORT, BAUDRATE)
 
-app = Flask(__name__,  static_url_path='')
+app = Flask(__name__, static_url_path='/static')
+app.debug = True
+
 
 def get_sensors():
   ser.write('r')
@@ -31,19 +33,27 @@ def get_sensors():
   m = json.loads(jsonInfo)
   influxdb.write_points([m])
 
+
 def run_schedule():
   while 1:
     schedule.run_pending()
     time.sleep(1)
 
+
 @app.route('/', methods=['GET'])
 def index():
-  return '<html>test</html>'
+  return app.send_static_file('index.html')
+
+
+@app.route('/<path:path>')
+def static_proxy(path):
+  # send_static_file will guess the correct MIME type
+  return app.send_static_file(path)
 
 if __name__ == '__main__':
   schedule.every(READ_SENSORS_TIMER).seconds.do(get_sensors)
   t = Thread(target=run_schedule)
   t.daemon = True
   t.start()
-  app.run(debug=True, use_reloader=False, host='0.0.0.0', port=5000)
+  app.run(debug=True, use_reloader=False, host='0.0.0.0', port=80)
   ser.close()
