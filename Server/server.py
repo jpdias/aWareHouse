@@ -31,10 +31,10 @@ def get_sensors():
   jsonInfo = jsonInfo.replace('\n', '')
   jsonInfo = jsonInfo.replace('\r', '')
   jsonInfo = jsonInfo.replace('\'', '\"')
-  o = json.dumps("[" + jsonInfo + "]")
-  m = json.loads(o)
-  pprint(m)
-  influxdb.write_points(m)
+  #o = json.dumps("[" + jsonInfo + "]")
+  m = json.loads(jsonInfo)
+  print(m)
+  influxdb.write_points([m])
 
 
 def run_schedule():
