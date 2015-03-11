@@ -2,13 +2,14 @@ import serial
 import schedule
 import time
 import json
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from threading import Thread
 from influxdb import InfluxDBClient
+from pprint import pprint
 
 COM_PORT = 2
 BAUDRATE = 9600
-READ_SENSORS_TIMER = 1
+READ_SENSORS_TIMER = 5
 DB_HOST = '192.168.1.73'
 DB_PORT = 8086
 DB_NAME = 'awarehouse'
@@ -25,15 +26,15 @@ start_time = time.time()
 
 
 def get_sensors():
-  # ser.write('r')
-  json = "fixme" # ser.readline()
-  influxdb.write_points([{
-    "points": [[20.44, 30, 231]],
-    "name": "sensors",
-    "columns": ["temp1", "light_sensor", "light"]
-  }])
-
-  print json
+  ser.write('r')
+  jsonInfo = ser.readline()
+  jsonInfo = jsonInfo.replace('\n', '')
+  jsonInfo = jsonInfo.replace('\r', '')
+  jsonInfo = jsonInfo.replace('\'', '\"')
+  o = json.dumps("[" + jsonInfo + "]")
+  m = json.loads(o)
+  pprint(m)
+  influxdb.write_points(m)
 
 
 def run_schedule():
