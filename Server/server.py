@@ -8,9 +8,11 @@ from influxdb import InfluxDBClient
 from pprint import pprint
 
 COM_PORT = 2
+# COM_PORT = "/dev/ttyUSB0"
 BAUDRATE = 9600
 READ_SENSORS_TIMER = 5
 DB_HOST = '192.168.1.73'
+#DB_HOST = "localhost"
 DB_PORT = 8086
 DB_NAME = 'awarehouse'
 DB_PASS = 'admin'
@@ -55,5 +57,5 @@ if __name__ == '__main__':
   t = Thread(target=run_schedule)
   t.daemon = True
   t.start()
-  app.run(debug=True, use_reloader=False, host='0.0.0.0', port=80)
+  app.run(debug=True, use_reloader=False, host='0.0.0.0', port=8080)
   ser.close()
