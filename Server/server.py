@@ -2,7 +2,7 @@ import serial
 import schedule
 import time
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from threading import Thread
 from influxdb import InfluxDBClient
 from pprint import pprint
@@ -20,7 +20,7 @@ influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
 
 ser = serial.Serial(COM_PORT, BAUDRATE)
 
-app = Flask(__name__)
+app = Flask(__name__,  static_url_path='')
 
 start_time = time.time()
 
