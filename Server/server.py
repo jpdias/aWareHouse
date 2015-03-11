@@ -22,26 +22,19 @@ ser = serial.Serial(COM_PORT, BAUDRATE)
 
 app = Flask(__name__,  static_url_path='')
 
-start_time = time.time()
-
-
 def get_sensors():
   ser.write('r')
   jsonInfo = ser.readline()
   jsonInfo = jsonInfo.replace('\n', '')
   jsonInfo = jsonInfo.replace('\r', '')
   jsonInfo = jsonInfo.replace('\'', '\"')
-  #o = json.dumps("[" + jsonInfo + "]")
   m = json.loads(jsonInfo)
-  print(m)
   influxdb.write_points([m])
-
 
 def run_schedule():
   while 1:
     schedule.run_pending()
     time.sleep(1)
-
 
 @app.route('/', methods=['GET'])
 def index():
