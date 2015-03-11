@@ -50,6 +50,7 @@ def index():
 if __name__ == '__main__':
   schedule.every(READ_SENSORS_TIMER).seconds.do(get_sensors)
   t = Thread(target=run_schedule)
+  t.daemon = True
   t.start()
   app.run(debug=True, use_reloader=False, host='0.0.0.0', port=5000)
   ser.close()
