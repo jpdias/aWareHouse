@@ -5,27 +5,49 @@
 #define LUX_PIN A1
 #define READ A0
 
+#define RED  2 //this sets the red led pin
+#define GREEN  4 //this sets the green led pin
+#define BLUE  3 //this sets the blue led pin
+
+
 OneWire oneWire(DS18B20_PIN);
 DallasTemperature sensors(&oneWire);
 
 void setup() {
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(BLUE, OUTPUT);
   Serial.begin(9600);
   sensors.begin();
 }
 
 void loop() {
-
+  setBlue();
   int b = Serial.read();
-  String json = "{";
 
-  //if ((char)b == 'r') {
+  if ((char)b == 'r') {
+    setGreen();
+    String json = "{";
+    json += temperature();
+    json += brightness() + "}";
+    Serial.println(json);
+  }
+}
 
-  json += temperature();
-  json += brightness() + "}";
-  Serial.println(json);
-  
-  delay(100);
-  //}
+void setBlue(){
+ digitalWrite(RED, HIGH);         
+ digitalWrite(GREEN, HIGH);
+ digitalWrite(BLUE, LOW);
+}
+void setGreen(){
+ digitalWrite(BLUE, HIGH);
+ digitalWrite(RED, HIGH);
+ digitalWrite(GREEN, LOW); 
+}
+void setRed(){
+ digitalWrite(BLUE, HIGH);
+ digitalWrite(RED, LOW);
+ digitalWrite(GREEN, HIGH); 
 }
 
 String temperature() {
