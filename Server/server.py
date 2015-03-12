@@ -7,10 +7,21 @@ from threading import Thread
 from influxdb import InfluxDBClient
 from pprint import pprint
 
+
+try:
+  from flask.ext.cors import CORS  # The typical way to import flask-cors
+except ImportError:
+  # Path hack allows examples to be run without installation.
+  import os
+  parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+  os.sys.path.insert(0, parentdir)
+  from flask.ext.cors import CORS
+
+
 COM_PORT = 2
 # COM_PORT = "/dev/ttyUSB0"
 BAUDRATE = 9600
-READ_SENSORS_TIMER = 5
+READ_SENSORS_TIMER = 30
 DB_HOST = '192.168.1.73'
 #DB_HOST = "localhost"
 DB_PORT = 8086
@@ -24,6 +35,7 @@ ser = serial.Serial(COM_PORT, BAUDRATE)
 
 app = Flask(__name__, static_url_path='/static')
 app.debug = True
+cors = CORS(app)
 
 
 def get_sensors():
