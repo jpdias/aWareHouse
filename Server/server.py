@@ -18,14 +18,13 @@ except ImportError:
   os.sys.path.insert(0, parentdir)
   from flask.ext.cors import CORS
 
-
-COM_PORT = 2
-# COM_PORT = "/dev/ttyUSB0"
+# COM_PORT = 2
+COM_PORT = "/dev/ttyUSB0"
 BAUDRATE = 9600
 READ_SENSORS_TIMER = 30
 GET_METEO_TIMER = 2 * 60
-DB_HOST = '192.168.1.73'
-#DB_HOST = "localhost"
+# DB_HOST = '192.168.1.73'
+DB_HOST = "localhost"
 DB_PORT = 8086
 DB_NAME = 'awarehouse'
 DB_PASS = 'admin'
@@ -38,6 +37,9 @@ FORECAST_LNG = -8.5846
 forecast = forecastio.load_forecast(
     FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
 
+current_forecast = {}
+
+
 influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
 
 ser = serial.Serial(COM_PORT, BAUDRATE)
@@ -46,7 +48,6 @@ app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
 
-
 def get_sensors():
   ser.write('r')
   jsonInfo = ser.readline()
@@ -54,18 +55,17 @@ def get_sensors():
   jsonInfo = jsonInfo.replace('\r', '')
   jsonInfo = jsonInfo.replace('\'', '\"')
   m = json.loads(jsonInfo)
-  influxdb.write_points([m])
+  influxdb.write_points([m, current_forecast])
 
 
 def get_meteo():
   temp = forecast.hourly().data[0].temperature
   humi = forecast.hourly().data[0].humidity
-  data = [{
-      "points": [[temp, humi]],
-      "name": "forecastio",
-      "columns": ["temperature", "humidity"]
-  }]
-  influxdb.write_points(data)
+  current_forecast = {
+     "points": [[temp, humi]],
+     "name": "forecastio",
+     "columns": ["temperature", "humidity"]
+  }
 
 
 def run_schedule():
@@ -85,6 +85,7 @@ def static_proxy(path):
   return app.send_static_file(path)
 
 if __name__ == '__main__':
+  get_meteo() # init current_forecast
   schedule.every(READ_SENSORS_TIMER).seconds.do(get_sensors)
   schedule.every(GET_METEO_TIMER).seconds.do(get_meteo)
   t = Thread(target=run_schedule)
