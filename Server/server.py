@@ -39,7 +39,6 @@ forecast = forecastio.load_forecast(
 
 current_forecast = {}
 
-
 influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
 
 ser = serial.Serial(COM_PORT, BAUDRATE)
@@ -57,22 +56,20 @@ def get_sensors():
   m = json.loads(jsonInfo)
   influxdb.write_points([m, current_forecast])
 
-
 def get_meteo():
   temp = forecast.hourly().data[0].temperature
   humi = forecast.hourly().data[0].humidity
+  global current_forecast
   current_forecast = {
      "points": [[temp, humi]],
      "name": "forecastio",
      "columns": ["temperature", "humidity"]
   }
 
-
 def run_schedule():
   while 1:
     schedule.run_pending()
     time.sleep(1)
-
 
 @app.route('/', methods=['GET'])
 def index():
