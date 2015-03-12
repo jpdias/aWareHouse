@@ -31,11 +31,12 @@ DB_NAME = 'awarehouse'
 DB_PASS = 'admin'
 DB_USER = 'admin'
 
-FORECAST_API_KEY = 111fece1a5a2d1828fb6e795221e2c25
+FORECAST_API_KEY = "111fece1a5a2d1828fb6e795221e2c25"
 FORECAST_LAT = 41.1791
 FORECAST_LNG = -8.5846
 
-forecast = forecastio.load_forecast(FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
+forecast = forecastio.load_forecast(
+    FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
 
 influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
 
@@ -55,15 +56,17 @@ def get_sensors():
   m = json.loads(jsonInfo)
   influxdb.write_points([m])
 
+
 def get_meteo():
   temp = forecast.hourly().data[0].temperature
   humi = forecast.hourly().data[0].humidity
   data = [{
-     "points": [[temp, humi]],
-     "name": "forecastio",
-     "columns": ["temperature", "humidity"]
+      "points": [[temp, humi]],
+      "name": "forecastio",
+      "columns": ["temperature", "humidity"]
   }]
   influxdb.write_points(data)
+
 
 def run_schedule():
   while 1:
