@@ -20,13 +20,13 @@ define(['settings'], function(Settings) {
     datasources: {
       influxdb: {
         type: 'influxdb',
-        url: "http://192.168.1.73:8086/db/awarehouse",
+        url: "http://jpdias.noip.me:8086/db/awarehouse",
         username: 'admin',
         password: 'admin',
       },
       grafana: {
         type: 'influxdb',
-        url: "http://192.168.1.73:8086/db/grafana",
+        url: "http://jpdias.noip.me:8086/db/grafana",
         username: 'grafana',
         password: 'grafana',
         grafanaDB: true
