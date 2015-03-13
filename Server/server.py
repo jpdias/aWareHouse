@@ -48,6 +48,7 @@ app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
 
+
 def get_sensors():
   ser.write('r')
   jsonInfo = ser.readline()
@@ -62,9 +63,9 @@ def get_meteo():
   temp = forecast.hourly().data[0].temperature
   humi = forecast.hourly().data[0].humidity
   current_forecast = {
-     "points": [[temp, humi]],
-     "name": "forecastio",
-     "columns": ["temperature", "humidity"]
+      "points": [[temp, humi]],
+      "name": "forecastio",
+      "columns": ["temperature", "humidity"]
   }
 
 
@@ -85,7 +86,7 @@ def static_proxy(path):
   return app.send_static_file(path)
 
 if __name__ == '__main__':
-  get_meteo() # init current_forecast
+  get_meteo()  # init current_forecast
   schedule.every(READ_SENSORS_TIMER).seconds.do(get_sensors)
   schedule.every(GET_METEO_TIMER).seconds.do(get_meteo)
   t = Thread(target=run_schedule)
