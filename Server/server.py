@@ -60,7 +60,7 @@ def get_sensors():
 
 
 def get_meteo():
-  temp = (forecast.currently().temperature - 32) * 1.8
+  temp = forecast.currently().temperature
   humi = forecast.currently().humidity
   global current_forecast
   current_forecast = {
