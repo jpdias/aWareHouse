@@ -33,6 +33,7 @@ DB_USER = 'admin'
 FORECAST_API_KEY = "111fece1a5a2d1828fb6e795221e2c25"
 FORECAST_LAT = 41.1791
 FORECAST_LNG = -8.5846
+#FORECAST_UNIT = "si"
 
 forecast = forecastio.load_forecast(
     FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
@@ -57,9 +58,10 @@ def get_sensors():
   m = json.loads(jsonInfo)
   influxdb.write_points([m, current_forecast])
 
+
 def get_meteo():
-  temp = forecast.hourly().data[0].temperature
-  humi = forecast.hourly().data[0].humidity
+  temp = (forecast.currently().temperature - 32) * 1.8
+  humi = forecast.currently().humidity
   global current_forecast
   current_forecast = {
       "points": [[temp, humi]],
@@ -67,10 +69,12 @@ def get_meteo():
       "columns": ["temperature", "humidity"]
   }
 
+
 def run_schedule():
   while 1:
     schedule.run_pending()
     time.sleep(1)
+
 
 @app.route('/', methods=['GET'])
 def index():
