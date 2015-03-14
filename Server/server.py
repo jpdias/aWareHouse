@@ -31,12 +31,10 @@ DB_PASS = 'admin'
 DB_USER = 'admin'
 
 FORECAST_API_KEY = "111fece1a5a2d1828fb6e795221e2c25"
-FORECAST_LAT = 41.1791
-FORECAST_LNG = -8.5846
+FORECAST_LAT = 41.1492
+FORECAST_LNG = -8.6104
 #FORECAST_UNIT = "si"
 
-forecast = forecastio.load_forecast(
-    FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
 
 current_forecast = {}
 
@@ -60,8 +58,10 @@ def get_sensors():
 
 
 def get_meteo():
+  forecast = forecastio.load_forecast(
+    FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
   temp = forecast.currently().temperature
-  humi = forecast.currently().humidity
+  humi = forecast.currently().humidity  
   global current_forecast
   current_forecast = {
       "points": [[temp, humi]],
