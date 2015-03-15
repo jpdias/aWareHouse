@@ -54,20 +54,27 @@ def get_sensors():
   jsonInfo = jsonInfo.replace('\r', '')
   jsonInfo = jsonInfo.replace('\'', '\"')
   m = json.loads(jsonInfo)
-  influxdb.write_points([m, current_forecast])
+  try:
+    influxdb.write_points([m, current_forecast])
+  except:
+    print "Unexpected error InfluxDB:", sys.exc_info()[0]
 
 
 def get_meteo():
-  forecast = forecastio.load_forecast(
-    FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
-  temp = forecast.currently().temperature
-  humi = forecast.currently().humidity  
-  global current_forecast
-  current_forecast = {
-      "points": [[temp, humi]],
-      "name": "forecastio",
-      "columns": ["temperature", "humidity"]
-  }
+  try:
+    forecast = forecastio.load_forecast(
+        FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
+    temp = forecast.currently().temperature
+    humi = forecast.currently().humidity
+  except:
+    print "Unexpected error Forecast.io:", sys.exc_info()[0]
+  else:
+    global current_forecast
+    current_forecast = {
+        "points": [[temp, humi]],
+        "name": "forecastio",
+        "columns": ["temperature", "humidity"]
+    }
 
 
 def run_schedule():
