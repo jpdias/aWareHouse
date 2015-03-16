@@ -102,7 +102,7 @@ def static_proxy(path):
 
 if __name__ == '__main__':
   get_meteo()  # init current_forecast
-  schedule.every(READ_SENSORS_TIMER).seconds.do(get_sensors)
+  schedule.every(READ_SENSORS_FAST_TIMER).seconds.do(get_sensors)
   schedule.every(GET_METEO_TIMER).seconds.do(get_meteo)
   t = Thread(target=run_schedule)
   t.daemon = True
