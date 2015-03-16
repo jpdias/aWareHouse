@@ -1,9 +1,12 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <dht.h>
 
 #define DS18B20_PIN 10
 #define LUX_PIN A1
 #define READ A0
+#define DHT_PIN A2
+#define SOUND_PIN A3
 
 #define RED  2 //this sets the red led pin
 #define GREEN  4 //this sets the green led pin
@@ -12,6 +15,7 @@
 
 OneWire oneWire(DS18B20_PIN);
 DallasTemperature sensors(&oneWire);
+dht DHT;
 
 void setup() {
   pinMode(RED, OUTPUT);
@@ -22,15 +26,16 @@ void setup() {
 }
 
 void loop() {
-  setBlue();
-  int b = Serial.read();
-
-  if ((char)b == 'r') {
+ setBlue();
+ int b = Serial.read();
+ if ((char)b == 'r') {
     setGreen();
+    DHT.read11(DHT_PIN);
     String json = "{'points':[[";
-    json += temperature() + "," + brightness() + "]],";
-    json += String("'name': 'sensors','columns': ['temp1', 'light_sensor', 'light']}");
+    json += temperature() + "," + DHT.temperature +  "," + DHT.humidity + "," + brightness() + "," + (1023-analogRead(SOUND_PIN)) + "]],";
+    json += String("'name': 'sensors','columns': ['temp1','temp2','humidity', 'light_sensor', 'light','sound']}");
     Serial.println(json);
+    
   }
 }
 
