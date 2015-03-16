@@ -49,7 +49,7 @@ cors = CORS(app)
 def get_sensors():
   if get_sensors.counter == ((READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER) - 1):
     ser.write('r')
-  else
+  else:
     ser.write('x')
 
   get_sensors.counter += 1
@@ -59,8 +59,9 @@ def get_sensors():
   jsonInfo = jsonInfo.replace('\r', '')
   jsonInfo = jsonInfo.replace('\'', '\"')
   m = json.loads(jsonInfo)
+  m.append(current_forecast)
   try:
-    influxdb.write_points([m, current_forecast])
+    influxdb.write_points(m)
   except:
     print "Unexpected error InfluxDB:", sys.exc_info()[0]
 
