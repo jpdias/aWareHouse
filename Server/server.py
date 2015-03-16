@@ -9,7 +9,6 @@ from threading import Thread
 from influxdb import InfluxDBClient
 from pprint import pprint
 
-
 try:
   from flask.ext.cors import CORS  # The typical way to import flask-cors
 except ImportError:
@@ -23,6 +22,7 @@ except ImportError:
 COM_PORT = "/dev/ttyUSB0"
 BAUDRATE = 9600
 READ_SENSORS_TIMER = 30
+READ_SENSORS_FAST_TIMER = 5
 GET_METEO_TIMER = 2 * 60
 # DB_HOST = '192.168.1.73'
 DB_HOST = "localhost"
@@ -36,7 +36,6 @@ FORECAST_LAT = 41.1492
 FORECAST_LNG = -8.6104
 #FORECAST_UNIT = "si"
 
-
 current_forecast = {}
 
 influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
@@ -47,9 +46,14 @@ app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
 
-
 def get_sensors():
-  ser.write('r')
+  if get_sensors.counter == ((READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER)) - 1):
+    ser.write('r')
+  else
+    ser.write('x')
+
+  get_sensors.counter += 1
+
   jsonInfo = ser.readline()
   jsonInfo = jsonInfo.replace('\n', '')
   jsonInfo = jsonInfo.replace('\r', '')
@@ -60,6 +64,7 @@ def get_sensors():
   except:
     print "Unexpected error InfluxDB:", sys.exc_info()[0]
 
+get_sensors.counter = 0
 
 def get_meteo():
   try:
