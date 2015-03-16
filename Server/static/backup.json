@@ -1,0 +1,606 @@
+{
+  "id": null,
+  "title": "aWareHouse",
+  "originalTitle": "aWareHouse",
+  "tags": [],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "hideControls": false,
+  "sharedCrosshair": true,
+  "rows": [
+    {
+      "title": "test",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "panels": [
+        {
+          "title": "Current Temperature",
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "singlestat",
+          "id": 5,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": null,
+          "targets": [
+            {
+              "function": "last",
+              "column": "temp1",
+              "series": "sensors",
+              "query": "select last(temp1) from \"sensors\" where $timeFilter group by time($interval) order asc",
+              "hide": false,
+              "alias": "temp",
+              "rawQuery": false,
+              "interval": ""
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "ºC",
+          "nullText": null,
+          "valueMaps": [],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "110%",
+          "postfixFontSize": "110%",
+          "thresholds": "0,30,40",
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(71, 212, 59, 0.4)",
+            "rgba(245, 150, 40, 0.73)",
+            "rgba(225, 40, 40, 0.59)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "Current Brightness",
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "singlestat",
+          "id": 6,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": null,
+          "targets": [
+            {
+              "function": "last",
+              "column": "light_sensor",
+              "series": "sensors",
+              "query": "select last(light_sensor) from \"sensors\" where $timeFilter group by time($interval) order asc"
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "110%",
+          "postfixFontSize": "110%",
+          "thresholds": "0,280,350",
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(96, 189, 255, 0.59)",
+            "rgba(245, 150, 40, 0.73)",
+            "rgba(255, 74, 0, 0.4)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "Current Humidity",
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "singlestat",
+          "id": 11,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": null,
+          "targets": [
+            {
+              "function": "last",
+              "column": "humidity",
+              "series": "sensors",
+              "query": "select last(humidity) from \"sensors\" where $timeFilter group by time($interval) order asc"
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "percent",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "80%",
+          "postfixFontSize": "50%",
+          "thresholds": "0,50,80",
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(0, 128, 255, 0.4)",
+            "rgba(245, 150, 40, 0.73)",
+            "rgba(225, 40, 40, 0.59)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "Sound",
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "singlestat",
+          "id": 8,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": null,
+          "targets": [
+            {
+              "function": "last",
+              "column": "sound",
+              "series": "sensors_fast",
+              "query": "select last(sound) from \"sensors_fast\" where $timeFilter group by time($interval) order asc"
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "110%",
+          "postfixFontSize": "110%",
+          "thresholds": "0,280,350",
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(62, 255, 231, 0.59)",
+            "rgba(245, 150, 40, 0.73)",
+            "rgba(255, 74, 0, 0.4)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Current Values",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "panels": [
+        {
+          "id": 4,
+          "span": 6,
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "none",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": null,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "options": false,
+          "legend": {
+            "show": true,
+            "values": true,
+            "min": true,
+            "max": true,
+            "current": false,
+            "total": false,
+            "avg": true,
+            "rightSide": false,
+            "hideEmpty": false,
+            "alignAsTable": true
+          },
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true,
+            "shared": true
+          },
+          "targets": [
+            {
+              "target": "randomWalk('random walk')",
+              "function": "mean",
+              "column": "temp1",
+              "series": "sensors",
+              "query": "select mean(temp1) from \"sensors\" where $timeFilter group by time($interval) order asc",
+              "interval": "",
+              "alias": "inside",
+              "fill": ""
+            },
+            {
+              "target": "",
+              "function": "mean",
+              "column": "temp2",
+              "series": "sensors",
+              "query": "select mean(temp2) from \"sensors\" where $timeFilter group by time($interval) order asc",
+              "alias": "inside (DHT11)"
+            },
+            {
+              "target": "",
+              "function": "mean",
+              "column": "temperature",
+              "series": "forecastio",
+              "query": "select mean(temperature) from \"forecastio\" where $timeFilter group by time($interval) order asc",
+              "interval": "",
+              "fill": "",
+              "alias": "forecast.io"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Temperature",
+          "datasource": "graphite",
+          "renderer": "flot",
+          "annotate": {
+            "enable": false
+          },
+          "seriesOverrides": [
+            {}
+          ],
+          "links": [],
+          "leftYAxisLabel": "ºC",
+          "interval": ">30s"
+        },
+        {
+          "id": 7,
+          "span": 6,
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": null,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": true,
+          "spyable": true,
+          "options": false,
+          "legend": {
+            "show": true,
+            "values": true,
+            "min": true,
+            "max": true,
+            "current": false,
+            "total": false,
+            "avg": true,
+            "rightSide": false,
+            "alignAsTable": true
+          },
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true,
+            "shared": false
+          },
+          "targets": [
+            {
+              "target": "randomWalk('random walk')",
+              "function": "mean",
+              "column": "light_sensor",
+              "series": "sensors",
+              "query": "select mean(light_sensor) from \"sensors\" where $timeFilter group by time($interval) order asc",
+              "interval": "10s",
+              "hide": false,
+              "fill": "",
+              "alias": "light sensor"
+            },
+            {
+              "target": "",
+              "function": "mean",
+              "column": "light",
+              "series": "sensors",
+              "query": "select mean(light) from \"sensors\" where $timeFilter group by time($interval) order asc",
+              "alias": "LED sensor",
+              "interval": "10s"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Brightness",
+          "datasource": "graphite",
+          "renderer": "flot",
+          "annotate": {
+            "enable": false
+          },
+          "seriesOverrides": [],
+          "links": [],
+          "leftYAxisLabel": "",
+          "interval": ">30s"
+        }
+      ]
+    },
+    {
+      "title": "New row",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "panels": [
+        {
+          "title": "Humidity",
+          "error": false,
+          "span": 6,
+          "editable": true,
+          "type": "graph",
+          "id": 9,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 3,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": false
+          },
+          "targets": [
+            {
+              "function": "mean",
+              "column": "humidity",
+              "series": "forecastio",
+              "query": "select mean(humidity) from \"forecastio\" where $timeFilter group by time($interval) order asc",
+              "fill": "",
+              "alias": "forecast.io",
+              "interval": ""
+            },
+            {
+              "target": "",
+              "function": "mean",
+              "column": "humidity",
+              "series": "sensors",
+              "query": "select mean(humidity) from \"sensors\" where $timeFilter group by time($interval) order asc",
+              "rawQuery": true,
+              "alias": "inside",
+              "interval": ""
+            }
+          ],
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "links": [],
+          "interval": ">30s"
+        },
+        {
+          "title": "Sound Level",
+          "error": false,
+          "span": 6,
+          "editable": true,
+          "type": "graph",
+          "id": 10,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 0,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": false
+          },
+          "targets": [
+            {
+              "function": "mean",
+              "column": "sound",
+              "series": "sensors_fast",
+              "query": "select mean(sound) from \"sensors_fast\" where $timeFilter group by time($interval) order asc",
+              "alias": "sound"
+            }
+          ],
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "links": [],
+          "interval": ">5s"
+        }
+      ]
+    }
+  ],
+  "nav": [
+    {
+      "type": "timepicker",
+      "collapse": false,
+      "enable": true,
+      "status": "Stable",
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ],
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "now": true,
+      "notice": false
+    }
+  ],
+  "time": {
+    "from": "2015-03-16T22:45:04.879Z",
+    "to": "now",
+    "now": true
+  },
+  "templating": {
+    "list": [],
+    "enable": false
+  },
+  "annotations": {
+    "list": [],
+    "enable": false
+  },
+  "refresh": "5s",
+  "version": 6,
+  "hideAllLegends": false
+}
