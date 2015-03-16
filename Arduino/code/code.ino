@@ -44,13 +44,13 @@ void loop() {
     json += temperature() + "," + t +  "," + h + "," + hi + "," + brightness() + "]],";
     json += String("'name': 'sensors', 'columns': ['temp1', 'temp2', 'humidity', 'heat_index', 'light_sensor', 'light']},");
     json += "{'points':[[";
-    json += String(readSound(50)) + "]],";
+    json += String(readSound(5)) + "]],";
     json += String("'name': 'sensors_fast', 'columns': ['sound']}]");
     Serial.println(json);
   } else if ((char)b == 'x') {
     setYellow();
     String json = "[{'points':[[";
-    json += String(readSound(50)) + "]],";
+    json += String(readSound(5)) + "]],";
     json += String("'name': 'sensors_fast', 'columns': ['sound']}]");
     Serial.println(json);
   }
@@ -103,10 +103,10 @@ int readSound(int number) {
 
   for (int x = 0; x < number; ++x) {
     total += analogRead(SOUND_PIN);
-    delay(10);
+    delay(100);
   }
   
-  return total / number;
+  return 1023 - total / number;
 }
 
 int readLED(int number) { // Read analog value n times and average over those n times
