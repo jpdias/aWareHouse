@@ -3,6 +3,7 @@ import schedule
 import time
 import json
 import forecastio
+import sys
 from flask import Flask, request, jsonify, send_from_directory
 from threading import Thread
 from influxdb import InfluxDBClient
@@ -65,7 +66,7 @@ def get_meteo():
     forecast = forecastio.load_forecast(
         FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
     temp = forecast.currently().temperature
-    humi = forecast.currently().humidity
+    humi = forecast.currently().humidity * 100
   except:
     print "Unexpected error Forecast.io:", sys.exc_info()[0]
   else:
