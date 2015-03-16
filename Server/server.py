@@ -53,7 +53,7 @@ def get_sensors():
   try:
     influxdb.write_points(m)
   except:
-    print "Unexpected error InfluxDB:", sys.exc_info()[0]
+    print "Unexpected error InfluxDB:", os.sys.exc_info()[0]
 
 def get_meteo():
   try:
@@ -62,7 +62,7 @@ def get_meteo():
     temp = forecast.currently().temperature
     humi = forecast.currently().humidity * 100
   except:
-    print "Unexpected error Forecast.io:", sys.exc_info()[0]
+    print "Unexpected error Forecast.io:", os.sys.exc_info()[0]
   else:
     jsonInfo = {
         "points": [[temp, humi]],
@@ -72,7 +72,7 @@ def get_meteo():
     try:
       influxdb.write_points(jsonInfo)
     except:
-      print "Unexpected error InfluxDB:", sys.exc_info()[0]
+      print "Unexpected error InfluxDB:", os.sys.exc_info()[0]
 
 def run_schedule():
   while 1:
