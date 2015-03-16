@@ -46,14 +46,14 @@ app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
 
+
 def get_sensors():
   if get_sensors.counter == ((READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER) - 1):
     ser.write('r')
+    get_sensors.counter = 0
   else:
     ser.write('x')
-
   get_sensors.counter += 1
-
   jsonInfo = ser.readline()
   jsonInfo = jsonInfo.replace('\n', '')
   jsonInfo = jsonInfo.replace('\r', '')
@@ -66,6 +66,7 @@ def get_sensors():
     print "Unexpected error InfluxDB:", sys.exc_info()[0]
 
 get_sensors.counter = 0
+
 
 def get_meteo():
   try:
