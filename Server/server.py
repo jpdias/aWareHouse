@@ -48,18 +48,23 @@ cors = CORS(app)
 
 
 def get_sensors():
-  if get_sensors.counter == ((READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER) - 1):
+  slow = get_sensors.counter == (
+      (READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER) - 1)
+
+  if slow:
     ser.write('r')
     get_sensors.counter = 0
   else:
     ser.write('x')
+
   get_sensors.counter += 1
   jsonInfo = ser.readline()
   jsonInfo = jsonInfo.replace('\n', '')
   jsonInfo = jsonInfo.replace('\r', '')
   jsonInfo = jsonInfo.replace('\'', '\"')
   m = json.loads(jsonInfo)
-  m.append(current_forecast)
+  if slow:
+    m.append(current_forecast)
   try:
     influxdb.write_points(m)
   except:
