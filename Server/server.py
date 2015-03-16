@@ -35,9 +35,6 @@ FORECAST_LAT = 41.1492
 FORECAST_LNG = -8.6104
 #FORECAST_UNIT = "si"
 
-
-current_forecast = {}
-
 influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
 
 ser = serial.Serial(COM_PORT, BAUDRATE)
@@ -45,7 +42,6 @@ ser = serial.Serial(COM_PORT, BAUDRATE)
 app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
-
 
 def get_sensors():
   ser.write('r')
@@ -55,27 +51,28 @@ def get_sensors():
   jsonInfo = jsonInfo.replace('\'', '\"')
   m = json.loads(jsonInfo)
   try:
-    influxdb.write_points([m, current_forecast])
+    influxdb.write_points(m)
   except:
     print "Unexpected error InfluxDB:", sys.exc_info()[0]
-
 
 def get_meteo():
   try:
     forecast = forecastio.load_forecast(
         FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
     temp = forecast.currently().temperature
-    humi = forecast.currently().humidity
+    humi = forecast.currently().humidity * 100
   except:
     print "Unexpected error Forecast.io:", sys.exc_info()[0]
   else:
-    global current_forecast
-    current_forecast = {
+    jsonInfo = {
         "points": [[temp, humi]],
         "name": "forecastio",
         "columns": ["temperature", "humidity"]
     }
-
+    try:
+      influxdb.write_points(jsonInfo)
+    except:
+      print "Unexpected error InfluxDB:", sys.exc_info()[0]
 
 def run_schedule():
   while 1:
@@ -94,7 +91,6 @@ def static_proxy(path):
   return app.send_static_file(path)
 
 if __name__ == '__main__':
-  get_meteo()  # init current_forecast
   schedule.every(READ_SENSORS_TIMER).seconds.do(get_sensors)
   schedule.every(GET_METEO_TIMER).seconds.do(get_meteo)
   t = Thread(target=run_schedule)
