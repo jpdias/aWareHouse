@@ -47,7 +47,7 @@ app.debug = True
 cors = CORS(app)
 
 def get_sensors():
-  if get_sensors.counter == ((READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER)) - 1):
+  if get_sensors.counter == ((READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER) - 1):
     ser.write('r')
   else
     ser.write('x')
