@@ -18,22 +18,27 @@ except ImportError:
     os.sys.path.insert(0, parentdir)
     from flask.ext.cors import CORS
 
+with open('config.json') as data_file:    
+    data = json.load(data_file)	
+	
 # COM_PORT = 2
-COM_PORT = "/dev/ttyUSB0"
-BAUDRATE = 9600
-READ_SENSORS_TIMER = 30
-READ_SENSORS_FAST_TIMER = 5
-GET_METEO_TIMER = 2 * 60
-# DB_HOST = '192.168.1.73'
-DB_HOST = "localhost"
-DB_PORT = 8086
-DB_NAME = 'awarehouse'
-DB_PASS = 'admin'
-DB_USER = 'admin'
+COM_PORT = data['config']['arduino']['com_port']
+BAUDRATE = data['config']['arduino']['baudrate']
+READ_SENSORS_TIMER = data['config']['arduino']['read_sensors_timer']
+READ_SENSORS_FAST_TIMER = data['config']['arduino']['read_sensors_fast_timer']
+GET_METEO_TIMER = data['config']['arduino']['get_meteo_timer']
 
-FORECAST_API_KEY = "111fece1a5a2d1828fb6e795221e2c25"
-FORECAST_LAT = 41.1492
-FORECAST_LNG = -8.6104
+# DB_HOST = '192.168.1.73'
+DB_HOST = data['config']['db']['host']
+DB_PORT = data['config']['db']['port']
+DB_NAME = data['config']['db']['name']
+DB_PASS = data['config']['db']['password']
+DB_USER = data['config']['db']['username']
+
+FORECAST_API_KEY = data['config']['forecast']['api']
+FORECAST_LAT = data['config']['forecast']['lat']
+FORECAST_LNG = data['config']['forecast']['long']
+FORECAST_LOCAL = data['config']['forecast']['local']
 # FORECAST_UNIT = "si"
 
 current_forecast = {}
