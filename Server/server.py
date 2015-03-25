@@ -14,56 +14,50 @@ try:
 except ImportError:
   # Path hack allows examples to be run without installation.
   import os
-
   parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
   os.sys.path.insert(0, parentdir)
   from flask.ext.cors import CORS
 
-with open('config.json') as data_file:
-  data = json.load(data_file)
-  data_file.close()
-
-# COM_PORT = 2
-COM_PORT = data['config']['arduino']['com_port']
-BAUDRATE = data['config']['arduino']['baudrate']
-READ_SENSORS_TIMER = data['config']['arduino']['read_sensors_timer']
-READ_SENSORS_FAST_TIMER = data['config']['arduino']['read_sensors_fast_timer']
-GET_METEO_TIMER = data['config']['arduino']['get_meteo_timer']
-
-# DB_HOST = '192.168.1.73'
-DB_HOST = data['config']['db']['host']
-DB_PORT = data['config']['db']['port']
-DB_NAME = data['config']['db']['name']
-DB_PASS = data['config']['db']['password']
-DB_USER = data['config']['db']['username']
-
-FORECAST_API_KEY = data['config']['forecast']['api']
-FORECAST_LAT = data['config']['forecast']['lat']
-FORECAST_LNG = data['config']['forecast']['long']
-FORECAST_LOCAL = data['config']['forecast']['local']
-# FORECAST_UNIT = "si"
-
+FILE_NAME = "config.json"
+config = {}
 current_forecast = {}
-
-influxdb = InfluxDBClient(DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME)
-
-ser = serial.Serial(COM_PORT, BAUDRATE)
+client = None
+influxdb = None
+ser = None
 
 app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
 
 
+def load_file():
+  with open(FILE_NAME, "r") as data_file:
+    config = json.load(data_file)
+    client = TwilioRestClient(
+        config['config']['alert']['sid'], config['config']['alert']['token'])
+    influxdb = InfluxDBClient(config['config']['db']['host'], config['config']['db']['port'], config[
+                              'config']['db']['username'], config['config']['db']['password'], config['config']['db']['name'])
+    ser = serial.Serial(
+        config['config']['arduino']['com_port'], config['config']['arduino']['baudrate'])
+    data_file.close()
+
+
+def send_sms(content):
+  client.messages.create(
+      to=config['config']['alert']['to'],
+      from_=config['config']['alert']['from'],
+      body=content,
+  )
+
+
 def get_sensors():
   slow = get_sensors.counter == (
-      (READ_SENSORS_TIMER / READ_SENSORS_FAST_TIMER) - 1)
-
+      (config['config']['arduino']['read_sensors_timer'] / config['config']['arduino']['read_sensors_fast_timer']) - 1)
   if slow:
     ser.write('r')
     get_sensors.counter = 0
   else:
     ser.write('x')
-
   get_sensors.counter += 1
   json_info = ser.readline()
   json_info = json_info.replace('\n', '')
@@ -84,7 +78,7 @@ get_sensors.counter = 0
 def get_meteo():
   try:
     forecast = forecastio.load_forecast(
-        FORECAST_API_KEY, FORECAST_LAT, FORECAST_LNG)
+        config['config']['forecast']['api'], config['config']['forecast']['lat'], config['config']['forecast']['long'])
     temp = forecast.currently().temperature
     humi = forecast.currently().humidity * 100
   except:
@@ -109,6 +103,15 @@ def index():
   return app.send_static_file('index.html')
 
 
+@app.route('/config', methods=['POST'])
+def index():
+  data = request.form["config"]
+  with open(FILE_NAME, "w") as data_file:
+    data_file.write(json.dumps(data))
+  load_file()
+  return app.send_static_file('index.html')
+
+
 @app.route('/<path:path>')
 def static_proxy(path):
   # send_static_file will guess the correct MIME type
@@ -116,9 +119,12 @@ def static_proxy(path):
 
 
 if __name__ == '__main__':
+  load_file()
   get_meteo()  # init current_forecast
-  schedule.every(READ_SENSORS_FAST_TIMER).seconds.do(get_sensors)
-  schedule.every(GET_METEO_TIMER).seconds.do(get_meteo)
+  schedule.every(
+      config['config']['arduino']['read_sensors_fast_timer']).seconds.do(get_sensors)
+  schedule.every(
+      config['config']['arduino']['get_meteo_timer']).seconds.do(get_meteo)
   t = Thread(target=run_schedule)
   t.daemon = True
   t.start()
