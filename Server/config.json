@@ -1,47 +1,35 @@
 {
-  config: {
-    arduino: {
-      com_port: '/dev/ttyUSB0',
-      baudrate: 9600,
-      read_sensors_timer: 30,
-      read_sensors_fast_timer: 5,
-      get_meteo_timer: 120
+  "config": {
+    "arduino": {
+      "com_port": "/dev/ttyUSB0",
+      "baudrate": 9600,
+      "read_sensors_timer": 30,
+      "read_sensors_fast_timer": 5,
+      "get_meteo_timer": 120
     },
-    db: {
-      host: 'localhost',
-      port: 8086,
-      name: 'awarehouse',
-      password: 'admin',
-      username: 'admin'
+    "db": {
+      "host": "localhost",
+      "port": 8086,
+      "name": "awarehouse",
+      "password": "admin",
+      "username": "admin"
     },
-    forecast: {
-      api: '111fece1a5a2d1828fb6e795221e2c25',
-      lat: 41.1492,
-      long: -8.6104,
-      local: 'Porto'
+    "forecast": {
+      "api": "111fece1a5a2d1828fb6e795221e2c25",
+      "lat": 41.1492,
+      "long": -8.6104,
+      "local": "Porto"
     }
   },
-  warning: [{
-    type: 'temperature',
-    op: '>=',
-    value: 30.5,
-    action: '...'
+  "warning": [{
+    "type": "temperature",
+    "op": ">=",
+    "value": 30.5,
+    "action": "..."
   }, {
-    type: 'humidity',
-    op: '>=',
-    value: 30.5
-  }, {
-    type: 'sonar',
-    op: '!=',
-    value: 30.5
-  }, {
-    type: 'sound',
-    op: '>=',
-    value: 30.5
-  }, {
-    type: 'brightness',
-    op: '>=',
-    value: 30.5
+    "type": "humidity",
+    "op": ">=",
+    "value": 30.5
   }]
 
 }
