@@ -19,6 +19,12 @@
       "lat": 41.1492,
       "long": -8.6104,
       "local": "Porto"
+    },
+    "alerts": {
+      "to": "+351926826443",
+      "from": "+13522890122",
+      "sid": "ACb1dd53fb177436f10cf05b4f772a262f",
+      "token": "3286cdb06fe619c2e5b0370c11c7b36e"
     }
   },
   "warning": [{

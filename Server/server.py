@@ -7,6 +7,7 @@ import sys
 from flask import Flask
 from threading import Thread
 from influxdb import InfluxDBClient
+from twilio.rest import TwilioRestClient
 
 try:
   from flask.ext.cors import CORS  # The typical way to import flask-cors
