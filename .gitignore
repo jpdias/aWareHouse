@@ -1,2 +1,5 @@
 Server/venv
 nohup.out
+
+.idea
+*.iml
