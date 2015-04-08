@@ -8,6 +8,7 @@ from flask import Flask
 from threading import Thread
 from influxdb import InfluxDBClient
 from twilio.rest import TwilioRestClient
+from flask import jsonify
 
 try:
   from flask.ext.cors import CORS  # The typical way to import flask-cors
@@ -32,11 +33,15 @@ cors = CORS(app)
 
 def load_file():
   with open(FILE_NAME, "r") as data_file:
+    global config
     config = json.load(data_file)
+    global client
     client = TwilioRestClient(
-        config['config']['alert']['sid'], config['config']['alert']['token'])
+        config['config']['alerts']['sid'], config['config']['alerts']['token'])
+    global influxdb
     influxdb = InfluxDBClient(config['config']['db']['host'], config['config']['db']['port'], config[
                               'config']['db']['username'], config['config']['db']['password'], config['config']['db']['name'])
+    global ser
     ser = serial.Serial(
         config['config']['arduino']['com_port'], config['config']['arduino']['baudrate'])
     data_file.close()
@@ -103,28 +108,21 @@ def index():
   return app.send_static_file('index.html')
 
 
-@app.route('/', methods=['GET'])
-def index():
-  return app.send_static_file('index.html')
-
-
 @app.route('/api/get_current_config')
-def get_current_user():
-  return config
+def get_api_config():
+  return jsonify(config)
 
 
-@app.route('/config', methods=['GET'])
-def get_current_user():
-  return app.send_static_file('configuration/index.html')
-
-
-@app.route('/config', methods=['POST'])
-def index():
-  data = request.form["config"]
-  with open(FILE_NAME, "w") as data_file:
-    data_file.write(json.dumps(data))
-  load_file()
-  return app.send_static_file('index.html')
+@app.route('/config', methods=['GET', 'POST'])
+def configuration():
+  if request.method == 'POST':
+    data = request.form["config"]
+    with open(FILE_NAME, "w") as data_file:
+      data_file.write(json.dumps(data))
+    load_file()
+    return app.send_static_file('index.html')
+  else:
+    return app.send_static_file('configuration/index.html')
 
 
 @app.route('/<path:path>')
