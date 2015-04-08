@@ -103,6 +103,21 @@ def index():
   return app.send_static_file('index.html')
 
 
+@app.route('/', methods=['GET'])
+def index():
+  return app.send_static_file('index.html')
+
+
+@app.route('/api/get_current_config')
+def get_current_user():
+  return config
+
+
+@app.route('/config', methods=['GET'])
+def get_current_user():
+  return app.send_static_file('configuration/index.html')
+
+
 @app.route('/config', methods=['POST'])
 def index():
   data = request.form["config"]
