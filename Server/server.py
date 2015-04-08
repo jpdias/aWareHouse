@@ -4,11 +4,10 @@ import time
 import json
 import forecastio
 import sys
-from flask import Flask
+from flask import Flask, request, jsonify
 from threading import Thread
 from influxdb import InfluxDBClient
 from twilio.rest import TwilioRestClient
-from flask import jsonify
 
 try:
   from flask.ext.cors import CORS  # The typical way to import flask-cors
