@@ -1,6 +1,6 @@
 var loadData;
 
-$.getJSON("/api/get_current_config", function(data) {
+$.getJSON("/api/config", function(data) {
   loadData = data;
   for (var key in data.config) {
     if (key === "alerts") {

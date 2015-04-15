@@ -112,23 +112,14 @@ def get_api_config():
     if request.method == 'GET':
         return jsonify(config)
     else:
-        json = request.json
-        print(json)
-        with open(FILE_NAME, "w") as data_file:
-          data_file.write(json.dumps(data))
-        load_file()
-        return None
+        data = request.data
+	print data
+        dataDict = json.loads(data)
+	print dataDict		
 
 
-@app.route('/config', methods=['GET', 'POST'])
+@app.route('/config', methods=['GET'])
 def configuration():
-  if request.method == 'POST':
-    data = request.form["config"]
-    with open(FILE_NAME, "w") as data_file:
-      data_file.write(json.dumps(data))
-    load_file()
-    return app.send_static_file('index.html')
-  else:
     return app.send_static_file('configuration/index.html')
 
 
