@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify
 from threading import Thread
 from influxdb import InfluxDBClient
 from twilio.rest import TwilioRestClient
+from decimal import Decimal
 
 try:
   from flask.ext.cors import CORS  # The typical way to import flask-cors
@@ -112,10 +113,11 @@ def get_api_config():
     if request.method == 'GET':
         return jsonify(config)
     else:
-        data = request.data
-	print data
-        dataDict = json.loads(data)
-	print dataDict
+        data = request.json
+	with open(FILE_NAME, 'w') as outfile:
+    		json.dump(data, outfile)	
+	load_file()
+	return "done"
 
 
 @app.route('/config', methods=['GET'])
