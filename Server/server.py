@@ -115,7 +115,7 @@ def get_api_config():
         data = request.data
 	print data
         dataDict = json.loads(data)
-	print dataDict		
+	print dataDict
 
 
 @app.route('/config', methods=['GET'])

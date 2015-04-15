@@ -51,7 +51,13 @@ $("#submit").on("click", function() {
       }
     }
   }
-  $.post("/api/config", function(data) {
-    alert("Update Sucessful");
+  $.ajax({
+    type: "POST",
+    url: "/api/config",
+    data: loadData,
+    contentType: 'application/json;charset=UTF-8',
+    success: function(result) {
+      console.log(result);
+    }
   });
 });
