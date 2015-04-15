@@ -107,9 +107,17 @@ def index():
   return app.send_static_file('index.html')
 
 
-@app.route('/api/get_current_config')
+@app.route('/api/config', methods=['GET', 'POST'])
 def get_api_config():
-  return jsonify(config)
+    if request.method == 'GET':
+        return jsonify(config)
+    else:
+        json = request.json
+        print(json)
+        with open(FILE_NAME, "w") as data_file:
+          data_file.write(json.dumps(data))
+        load_file()
+        return None
 
 
 @app.route('/config', methods=['GET', 'POST'])
