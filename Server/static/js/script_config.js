@@ -3,26 +3,9 @@ var loadData;
 $.getJSON("/api/config", function(data) {
   loadData = data;
   for (var key in data.config) {
-    if (key === "alerts") {
-      for (var keycode in data.config[key]) {
-        var sel = "#" + keycode + "";
-        $(sel).val(data.config[key][keycode]);
-      }
-    } else if (key === "arduino") {
-      for (var keycode in data.config[key]) {
-        var sel = "#" + keycode + "";
-        $(sel).val(data.config[key][keycode]);
-      }
-    } else if (key === "db") {
-      for (var keycode in data.config[key]) {
-        var sel = "#" + keycode + "";
-        $(sel).val(data.config[key][keycode]);
-      }
-    } else if (key === "forecast") {
-      for (var keycode in data.config[key]) {
-        var sel = "#" + keycode + "";
-        $(sel).val(data.config[key][keycode]);
-      }
+    for (var keycode in data.config[key]) {
+      var sel = "#" + keycode + "";
+      $(sel).val(data.config[key][keycode]);
     }
   }
 });
