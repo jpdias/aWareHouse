@@ -3,22 +3,22 @@ var loadData;
 $.getJSON("/api/config", function(data) {
   loadData = data;
   for (var key in data.config) {
-    for (var keycode in data.config[key]) {
-      var sel = "#" + keycode + "";
-      $(sel).val(data.config[key][keycode]);
+    for (var keyCode in data.config[key]) {
+      var sel = "#" + keyCode + "";
+      $(sel).val(data.config[key][keyCode]);
     }
   }
 });
 
 $("#submit").on("click", function() {
   for (var key in loadData.config) {
-    for (var keycode in loadData.config[key]) {
-      var sel = "#" + keycode + "";
+    for (var keyCode in loadData.config[key]) {
+      var sel = "#" + keyCode + "";
       var value = $(sel).val();
-      if(!isNaN(value)){
+      if (!isNaN(value)){
         value = Number(value);
       }
-      loadData.config[key][keycode] = value;
+      loadData.config[key][keyCode] = value;
     }
   }
   $.ajax({
