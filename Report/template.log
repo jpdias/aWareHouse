@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.9.20)  7 MAY 2015 23:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.9.20)  8 MAY 2015 17:41
 entering extended mode
 **template.tex
 (D:\Projects\aWareHouse\Report\template.tex
@@ -441,22 +441,37 @@ Package csquotes Info: ... configuration file loaded successfully.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\csquotes\csquotes.cfg"
 File: csquotes.cfg 
 ))
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\tabularx.sty"
+Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen118
+\extrarowheight=\dimen119
+\NC@list=\toks23
+\extratabsurround=\skip48
+\backup@length=\skip49
+)
+\TX@col@width=\dimen120
+\TX@old@table=\dimen121
+\TX@old@col=\dimen122
+\TX@target=\dimen123
+\TX@delta=\dimen124
+\TX@cols=\count114
+\TX@ftn=\toks24
+)
 (C:\Users\JP\AppData\Roaming\MiKTeX\2.9\tex\latex\appendix\appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
-\c@@pps=\count114
-\c@@ppsavesec=\count115
-\c@@ppsaveapp=\count116
+\c@@pps=\count115
+\c@@ppsavesec=\count116
+\c@@ppsaveapp=\count117
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
 
-(D:\Projects\aWareHouse\Report\template.aux
-
-LaTeX Warning: Label `fig:use' multiply defined.
-
-)
+(D:\Projects\aWareHouse\Report\template.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
@@ -469,21 +484,22 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
- (C:\Users\JP\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+
+(C:\Users\JP\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count117
-\scratchdimen=\dimen118
+\scratchcounter=\count118
+\scratchdimen=\dimen125
 \scratchbox=\box30
-\nofMPsegments=\count118
-\nofMParguments=\count119
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count120
-\MPscratchDim=\dimen119
-\MPnumerator=\count121
-\makeMPintoPDFobject=\count122
-\everyMPtoPDFconversion=\toks24
+\nofMPsegments=\count119
+\nofMParguments=\count120
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count121
+\MPscratchDim=\dimen126
+\MPnumerator=\count122
+\makeMPintoPDFobject=\count123
+\everyMPtoPDFconversion=\toks26
 )
-\c@lstlisting=\count123
+\c@lstlisting=\count124
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
@@ -521,41 +537,46 @@ File: use.png Graphic file (type png)
 Package pdftex.def Info: use.png used on input line 79.
 (pdftex.def)             Requested size: 249.25452pt x 277.18367pt.
 
-<arc.png, id=27, 467.49657pt x 260.47313pt>
+<arc.png, id=27, 486.31688pt x 260.47313pt>
 File: arc.png Graphic file (type png)
  <use arc.png>
-Package pdftex.def Info: arc.png used on input line 87.
-(pdftex.def)             Requested size: 397.37395pt x 221.4032pt.
+Package pdftex.def Info: arc.png used on input line 88.
+(pdftex.def)             Requested size: 409.71689pt x 219.44377pt.
 
-Overfull \hbox (7.37395pt too wide) in paragraph at lines 87--88
+Overfull \hbox (19.71689pt too wide) in paragraph at lines 88--89
  [][] 
  []
 
+[5 <D:/Projects/aWareHouse/Report/use.png>]
+<schematics.png, id=31, 483.406pt x 354.123pt>
+File: schematics.png Graphic file (type png)
+ <use schematics.png>
+Package pdftex.def Info: schematics.png used on input line 95.
+(pdftex.def)             Requested size: 409.71689pt x 300.15761pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Overfull \hbox (19.71689pt too wide) in paragraph at lines 95--96
+ [][] 
+ []
 
-[5 <D:/Projects/aWareHouse/Report/use.png>] [6 <D:/Projects/aWareHouse/Report/a
-rc.png>] [7] [8] [9] (D:\Projects\aWareHouse\Report\template.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[6 <D:/Projects/aWareHouse/Report/arc.png> <D:/Projects/aWareHouse/Report/schem
+atics.png>] [7] [8] [9] [10] [11] (D:\Projects\aWareHouse\Report\template.aux) 
+) 
 Here is how much of TeX's memory you used:
- 5607 strings out of 493921
- 82124 string characters out of 3147291
- 156288 words of memory out of 3000000
- 8833 multiletter control sequences out of 15000+200000
+ 5706 strings out of 493921
+ 83306 string characters out of 3147291
+ 158924 words of memory out of 3000000
+ 8926 multiletter control sequences out of 15000+200000
  10636 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 44i,7n,42p,797b,286s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on template.pdf (9 pages, 114032 bytes).
+ 44i,10n,42p,818b,286s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on template.pdf (11 pages, 443984 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 71 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

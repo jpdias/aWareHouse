@@ -13,7 +13,7 @@
 \usepackage{subfig}
 \usepackage{float}
 \usepackage{csquotes}  
-
+\usepackage{tabularx}  
 \usepackage[toc,page]{appendix}
 
 \begin{document}
@@ -82,21 +82,82 @@ As explained before the capabilities of this application make this a system usef
 \end{figure}
 
 \subsubsection{Architecture}
-\begin{figure}[h]
+
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.85]{arc.png}
+    \includegraphics[width=0.9\textwidth]{arc.png}
     \caption{Architecture diagram.}
-    \label{fig:use}
+    \label{fig:arc}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{schematics.png}
+    \caption{Circuit diagram.}
+    \label{fig:circ}
+\end{figure}
+
+
 \subsubsection{Programming Languages and Technologies}
+
+In the context of realizing this project it was conciliated a diversity of technologies and programming languages that, working together in the architecture presented at fig. \ref{fig:arc}, made the application possible. Starting by enumerating the programming languages used and the reasons for choosing those languages is presented in the table \ref{tab:prolangs}.
+
+
+\begin{table}[H]
+\begin{tabularx}{0.8\textwidth}{ |l|X| }
+  	\hline
+  	Arduino  & C/C++  \\
+ 	\hline
+ 	Python  & item 2   \\
+  	\hline
+ 	Web Languages  & HTML,JS,CSS   \\
+	\hline
+	SQL  & InfluxDB   \\
+	\hline
+\end{tabularx}
+	\caption{Programming languages.}
+  	\label{tab:prolangs}
+\end{table}
+
+In addiction to the programming languages we used a set of technologies as a part of our application as presented in table \ref{tab:tech}.
+
+\begin{table}[H]
+\begin{tabularx}{0.8\textwidth}{ |l|X| }
+  	\hline
+  	InfluxDB  &   \\
+ 	\hline
+ 	Grafana  &   \\
+  	\hline
+ 	Web API's & Twilio, Mandrill, Forecast.io   \\
+	\hline
+\end{tabularx}
+	\caption{Technologies.}
+  	\label{tab:tech}
+\end{table}
+
+-Python lib's (?)
+
 \subsection{Implementation Description}
+
 \subsubsection{Implementation Details}
+
+Socket communication over usb (Python - Arduino (c/c++))
+
+HTTP REST protocol  (web application - python server - InfluxDB - external API's - JSON)
+
 \subsubsection{Development Environment}
+
+Raspberry Pi, Arduino, Arduino IDE  + Compiler, Atom, SSH, Python Compiler, ARM architecture 
+
 \newpage
 \section{Conclusion}
+
+almost ready to market (?), easy to expand or adapt, usefulness of programming paradigms, big data and internet of things
+
 \newpage
 \section{Improvements}
+
+Motion, better management of storage (slow), advice system (?), better safety (credentials)
 \newpage
 \section{Resources}
 \subsection{\it{Bibliography}}
