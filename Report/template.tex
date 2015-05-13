@@ -22,7 +22,6 @@
 \setcounter{tocdepth}{3} 
 
 \begin{document}
-
 \setlength{\textwidth}{16cm}
 \setlength{\textheight}{22cm}
 \title{\huge{\textbf{\textit{aWareHouse}}}\linebreak
@@ -117,8 +116,7 @@ As explained before the capabilities of this application make this a system usef
   	\label{tab:prolangs}
 \end{table}
 
-
-\textbf{Arduino}
+\textbf{\\Arduino}
 
 \begin{figure}[H]
     \centering
@@ -127,15 +125,25 @@ As explained before the capabilities of this application make this a system usef
     \label{fig:arduino}
 \end{figure}
 
-\textbf{Raspberry Pi}
+The Arduino Nano (fig.\ref{fig:arduino}) is a small, complete, and breadboard-friendly micro-controller based on the ATmega328 processor chip and works with a Mini-B USB cable for energy and data transfer. It has 32 KB of flash memory space of which 2 KB used by bootloader.
+
+Each of the 14 digital pins on the Nano can be used as an input or output and 8 analog inputs, each of which provide 10 bits of resolution (i.e. 1024 different values). 
+
+The Arduino provides an UART TTL (5V) serial communication, which is available on digital pins 0 (RX) and 1 (TX). An FTDI FT232RL on the board channels this serial communication over USB and the FTDI drivers (included with the Arduino software) provide a virtual COM port to software on the computer. 
+
+
+\textbf{\\Raspberry Pi}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/rpi.png}
-    \caption{Raspberry Pi.}
+    \caption{Raspberry Pi 1 Model B.}
     \label{fig:rpi}
 \end{figure}
 
+The \textit{Raspberry Pi 1 Model B} (fig. \ref{fig:rpi}) is a single-board computer which can be used for many of the things that a desktop is used to.
+
+The design is based around a Broadcom BCM2835 SoC, which includes an ARM1176JZF-S 700 MHz processor, VideoCore IV GPU, and 512 Megabytes of RAM. The memory used is a SD card for booting and long-term storage. This board is intended to run Linux kernel based operating systems. Additionally this has two USB ports and a 10/100 Ethernet controller.
 
 \subsubsection{Logic Architecture}
 
@@ -225,7 +233,62 @@ Motion, better management of storage (slow), advice system (?), better safety (c
 \chapter{Appendix}
 \section{Hardware}
 \subsection{Raspberry Pi}
+
+Chip Broadcom BCM2835 SoC full HD multimedia applications processor
+
+CPU 700 MHz Low Power ARM1176JZ-F Applications Processor
+
+GPU	Dual Core VideoCore IV® Multimedia Co-Processor
+	  	
+Memory 512MB SDRAM
+
+Ethernet onboard 10/100 Ethernet RJ45 jack
+
+USB 2.0 Dual USB Connector
+
+Video Output HDMI (rev 1.3 \& 1.4) Composite RCA (PAL and NTSC)
+
+Audio Output 3.5mm jack, HDMI
+
+Onboard Storage SD, MMC, SDIO card slot
+
+Operating System Linux
+
+Dimensions 8.6cm x 5.4cm x 1.7cm
 \subsection{Arduino}
+
+Specifications:
+
+Microcontroller	Atmel ATmega328
+
+Operating Voltage (logic level)	5 V
+
+Input Voltage (recommended)	7-12 V
+
+Input Voltage (limits)	6-20 V
+
+Digital I/O Pins	14 (of which 6 provide PWM output)
+
+Analog Input Pins	8
+
+DC Current per I/O Pin	40 mA
+
+Flash Memory	32 KB (ATmega328) of which 2 KB used by bootloader
+
+SRAM  2 KB (ATmega328)
+
+EEPROM	1 KB (ATmega328)
+
+Clock Speed	16 MHz
+
+Dimensions	0.73" x 1.70"
+
+Length	45 mm
+
+Width	18 mm
+
+Weigth	5 g
+
 \subsection{Sensor DHT11}
 Technical specs:
 \begin{itemize}
