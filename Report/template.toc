@@ -1,17 +1,27 @@
 \select@language {english}
-\contentsline {section}{\numberline {1}Introduction}{4}
-\contentsline {section}{\numberline {2}System Description}{5}
-\contentsline {subsection}{\numberline {2.1}Conceptual Description}{5}
-\contentsline {subsubsection}{\numberline {2.1.1}Functionalities}{5}
-\contentsline {subsubsection}{\numberline {2.1.2}Architecture}{6}
-\contentsline {subsubsection}{\numberline {2.1.3}Programming Languages and Technologies}{7}
-\contentsline {subsection}{\numberline {2.2}Implementation Description}{7}
-\contentsline {subsubsection}{\numberline {2.2.1}Implementation Details}{7}
-\contentsline {subsubsection}{\numberline {2.2.2}Development Environment}{7}
-\contentsline {section}{\numberline {3}Conclusion}{8}
-\contentsline {section}{\numberline {4}Improvements}{9}
-\contentsline {section}{\numberline {5}Resources}{10}
-\contentsline {subsection}{\numberline {5.1}\it {Bibliography}}{10}
-\contentsline {subsection}{\numberline {5.2}\it {Software}}{10}
-\contentsline {section}{Appendices}{11}
-\contentsline {section}{\numberline {A}Appendix}{11}
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {chapter}{\numberline {2}System Description}{4}
+\contentsline {section}{\numberline {2.1}Conceptual Description}{4}
+\contentsline {subsection}{\numberline {2.1.1}Functionalities}{4}
+\contentsline {subsection}{\numberline {2.1.2}Architecture}{5}
+\contentsline {subsubsection}{\numberline {2.1.2.1}Physical Architecture}{5}
+\contentsline {subsubsection}{\numberline {2.1.2.2}Logic Architecture}{7}
+\contentsline {subsection}{\numberline {2.1.3}Programming Languages and Technologies}{7}
+\contentsline {section}{\numberline {2.2}Implementation Description}{8}
+\contentsline {subsection}{\numberline {2.2.1}Implementation Details}{8}
+\contentsline {subsection}{\numberline {2.2.2}Development Environment}{8}
+\contentsline {chapter}{\numberline {3}Conclusion}{9}
+\contentsline {chapter}{\numberline {4}Improvements}{10}
+\contentsline {chapter}{\numberline {5}Resources}{11}
+\contentsline {section}{\numberline {5.1}\it {Bibliography}}{11}
+\contentsline {section}{\numberline {5.2}\it {Software}}{11}
+\contentsline {chapter}{Appendices}{12}
+\contentsline {chapter}{\numberline {A}Appendix}{13}
+\contentsline {section}{\numberline {A.1}Hardware}{13}
+\contentsline {subsection}{\numberline {A.1.1}Raspberry Pi}{13}
+\contentsline {subsection}{\numberline {A.1.2}Arduino}{13}
+\contentsline {subsection}{\numberline {A.1.3}Sensor DHT11}{13}
+\contentsline {subsection}{\numberline {A.1.4}Sensor DS18B20}{13}
+\contentsline {subsection}{\numberline {A.1.5}Sound Sensor (LM393)}{14}
+\contentsline {subsection}{\numberline {A.1.6}Diffused Led}{14}
+\contentsline {subsection}{\numberline {A.1.7}Photo cell (CdS photoresistor)}{14}

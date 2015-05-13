@@ -1,9 +1,8 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{report}
 
 \usepackage{color}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage{verbatim}
 \usepackage{listings}
@@ -15,6 +14,12 @@
 \usepackage{csquotes}  
 \usepackage{tabularx}  
 \usepackage[toc,page]{appendix}
+\usepackage{caption}
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\bf}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3} 
 
 \begin{document}
 
@@ -58,7 +63,7 @@ For accomplishing this was used a combination of hardware/software and some diff
 %************************************************************************************************
 \newpage
 
-\section{Introduction}
+\chapter{Introduction}
 
 The \textit{aWareHouse} project was developed for the Programming Paradigms course unit of the Master in Informatics and Computing Engineering at FEUP. The project was developed with the objective of combine, at least, three programming paradigms in the same application.
 
@@ -71,9 +76,9 @@ So, we designed a low cost system capable of giving the user the possibility of,
 As explained before the capabilities of this application make this a system useful in a lot of situations, for example, the monitoring of a warehouse and verify the relation between weather and internal conditions to make decision on what is the best settings for a refrigeration system and assure that the, for example, temperature is always below the maximum recommended. Other example is simple use it as a house control system and, for example, verify if someone forgot to turn any light off.
 
 \newpage
-\section{System Description}
-\subsection{Conceptual Description}
-\subsubsection{Functionalities}
+\chapter{System Description}
+\section{Conceptual Description}
+\subsection{Functionalities}
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.7]{use.png}
@@ -81,7 +86,58 @@ As explained before the capabilities of this application make this a system usef
     \label{fig:use}
 \end{figure}
 
-\subsubsection{Architecture}
+\subsection{Architecture}
+
+\subsubsection{Physical Architecture}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{schematics.png}
+    \caption{Circuit diagram.}
+    \label{fig:circ}
+\end{figure}
+
+\begin{table}[H]
+\begin{tabularx}{0.85\textwidth}{ |l|X|p{3cm}| }
+  	\hline
+  	\textbf{Sensor}  & \textbf{Description} & \textbf{Input/Output} \\
+ 	\hline
+ 	DHT11  & Basic and low-cost digital temperature and humidity sensor. It uses a capacitive humidity sensor and a thermistor to measure the surrounding air, and spits out a digital signal on the data pin. & Temperature and Humidity values. \\
+ 	\hline
+ 	DS18B20  & 1-wire digital temperature sensor fairly precise (+- 0.5ºC over much of the range) and can give up to 12 bits of precision from the onboard digital-to-analog converter. & Temperature values. \\
+ 	\hline
+ 	LM393 & One single channel output sound level. Low level output signal and when there is sound output low, lights lit. & Sound level values. \\
+ 	\hline
+ 	Diffused LED & A diffuse LED with with separate red, green and blue LED chips inside, capable of emitting a color-mix resulted of the values passed to each chip. & RGB Color or Color-Mix.\\
+ 	\hline
+ 	Photo cell & Photo cell or CdS photoresistor is a little light sensor. As the squiggly face is exposed to more light, the resistance goes down and the voltage goes up. & Voltage value.\\
+ 	\hline
+\end{tabularx}
+	\caption{Sensors description.}
+  	\label{tab:prolangs}
+\end{table}
+
+
+\textbf{Arduino}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/arduino.png}
+    \caption{Arduino micro-controller.}
+    \label{fig:arduino}
+\end{figure}
+
+\textbf{Raspberry Pi}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/rpi.png}
+    \caption{Raspberry Pi.}
+    \label{fig:rpi}
+\end{figure}
+
+
+\subsubsection{Logic Architecture}
 
 \begin{figure}[H]
     \centering
@@ -90,15 +146,7 @@ As explained before the capabilities of this application make this a system usef
     \label{fig:arc}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{schematics.png}
-    \caption{Circuit diagram.}
-    \label{fig:circ}
-\end{figure}
-
-
-\subsubsection{Programming Languages and Technologies}
+\subsection{Programming Languages and Technologies}
 
 In the context of realizing this project it was conciliated a diversity of technologies and programming languages that, working together in the architecture presented at fig. \ref{fig:arc}, made the application possible. Starting by enumerating the programming languages used and the reasons for choosing those languages is presented in the table \ref{tab:prolangs}.
 
@@ -137,34 +185,36 @@ In addiction to the programming languages we used a set of technologies as a par
 
 -Python lib's (?)
 
-\subsection{Implementation Description}
+-Arduino lib's (?)
 
-\subsubsection{Implementation Details}
+\section{Implementation Description}
+
+\subsection{Implementation Details}
 
 Socket communication over usb (Python - Arduino (c/c++))
 
 HTTP REST protocol  (web application - python server - InfluxDB - external API's - JSON)
 
-\subsubsection{Development Environment}
+\subsection{Development Environment}
 
 Raspberry Pi, Arduino, Arduino IDE  + Compiler, Atom, SSH, Python Compiler, ARM architecture , Version Control - Git
 
 \newpage
-\section{Conclusion}
+\chapter{Conclusion}
 
 almost ready to market (?), easy to expand or adapt, usefulness of programming paradigms, big data and internet of things
 
 \newpage
-\section{Improvements}
+\chapter{Improvements}
 
 Motion, better management of storage (slow), advice system (?), better safety (credentials)
 \newpage
-\section{Resources}
-\subsection{\it{Bibliography}}
+\chapter{Resources}
+\section{\it{Bibliography}}
 \begin{description}
 \item Visual Studio 2013 Ultimate, Microsoft, \url{http://www.visualstudio.com/}.
 \end{description}
-\subsection{\it{Software}}
+\section{\it{Software}}
 \begin{description}
 \item Visual Studio 2013 Ultimate, Microsoft, \url{http://www.visualstudio.com/}.
 \end{description}
@@ -172,8 +222,63 @@ Motion, better management of storage (slow), advice system (?), better safety (c
 \newpage
 
 \begin{appendices}
-\section{Appendix}
-The contents...
+\chapter{Appendix}
+\section{Hardware}
+\subsection{Raspberry Pi}
+\subsection{Arduino}
+\subsection{Sensor DHT11}
+Technical specs:
+\begin{itemize}
+\item Low cost
+\item  3 to 5V power and I/O
+\item   2.5mA max current use during conversion (while requesting data)
+\item  Good for 20-80\% humidity readings with 5\% accuracy
+ \item   Good for 0-50C temperature readings +- 2C accuracy
+ \item   No more than 1 Hz sampling rate (once every second)
+ \item   Body size 15.5mm x 12mm x 5.5mm
+ \item   4 pins with 0.1" spacing
+
+    \end{itemize}
+
+\subsection{Sensor DS18B20}
+Technical specs:
+\begin{itemize}
+\item Usable temperature range: -55 to 125 C (-67F to +257F)
+\item 9 to 12 bit selectable resolution
+\item Uses 1-Wire interface- requires only one digital pin for communication
+\item Unique 64 bit ID burned into chip
+\item Multiple sensors can share one pin
+\item +-0.5C Accuracy from -10C to +85C
+\item Temperature-limit alarm system
+\item Query time is less than 750ms
+\item Usable with 3.0V to 5.5V power/data
+\end{itemize}
+\subsection{Sound Sensor (LM393)}
+Technical specs:
+\begin{itemize}
+\item LM393 (?)
+\item Electret microphone
+\item Working voltage: DC 4 ~ 6 V
+\item With a signal output instruction
+\item One single channel output
+\item Low level output signal
+\item When there is sound output low, lights lit
+\end{itemize}
+\subsection{Diffused Led}
+Technical specs:
+\begin{itemize}
+\item 10mm diameter
+\item Red: 623 nm wavelength, Green: 523 nm, Blue: 467 nm
+\item Red: 1.8-2.2V Forward Voltage, at 20mA current, Green: 3.0-3.4V, Blue: 3.0-3.4V
+\item 50 degree viewing angle.
+\item Red: 700 mcd typical brightness, Green: 2100 mcd, Blue: 900 mcd
+\end{itemize}
+\subsection{Photo cell (CdS photoresistor)}
+Technical specs:
+\begin{itemize}
+\item When its light, the resistance is about 5-10KOhm, when dark it goes up to 200KOhm.
+\item The voltage on the pin will be 2.5V or higher when its light out and near ground when its dark.
+\end{itemize}
 \end{appendices}
 
 \end{document}
