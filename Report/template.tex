@@ -78,15 +78,20 @@ As explained before the capabilities of this application make this a system usef
 \chapter{System Description}
 \section{Conceptual Description}
 \subsection{Functionalities}
-aWarehouse is a system that scans the environment of the room and stores all the information about it on a database.
-The system can read temperature, humidity, sound and luminosity values. The user can define maximum and minimum values so the system will alert whenever an environment factor exceeds this range.
-This way the user can have absolute control of the room where aWarehouse is installed. aWarehouse can be very useful in a server room, with the temperature sensor the user can control the room temperature and prevent an overheating. With the sound sensor the user knows if someone is in the room and with the luminosity sensor the user can check if a door is open for example.
-\begin{figure}[h]
+
+\begin{figure}
     \centering
-    \includegraphics[scale=0.7]{use.png}
+    \includegraphics[scale=0.5]{use.png}
     \caption{Use Case diagram.}
     \label{fig:use}
 \end{figure}
+
+The \textit{aWarehouse} application consist in a system that scans the environment of the room where the sensors are placed and stores all the information about it on a database.
+
+The system can read temperature, humidity, sound and luminosity values as described in \ref{fig:use}. Additionally user can define maximum and minimum values so the system will alert whenever an environment factor exceeds this range.
+This way the user can have absolute control of the room where \textit{aWarehouse} is installed. This application can be very useful in a server room, with the temperature sensor the user can control the room temperature and prevent an overheating. With the sound sensor the user knows if someone is in the room and with the luminosity sensor the user can check if,for example, a door is open.
+
+
 
 \subsection{Architecture}
 
