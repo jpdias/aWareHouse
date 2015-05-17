@@ -171,23 +171,23 @@ In the context of realizing this project it was conciliated a diversity of techn
 \begin{itemize}
 \item Arduino Language\cite{arduinolang} is a low level language based on C/C++ and integrated with AVR Libc\cite{avr} and allows the use of any of its functions for interacting with hardware. Since its a derivative language of C/C++ it has a multi-paradigm design being imperative and object-oriented. The version used is v1.6.4. 
 \begin{itemize}
-\item DHT Library\cite{dhtada}
-\item OneWire Library\cite{pjrc}
-\item Dallas Temperature Control Library\cite{dallas}
+\item DHT Sensor Library\cite{dhtada} is an Arduino library for the DHT series of low cost temperature/humidity sensors that facilitates the reading of values from this sensors.
+\item OneWire Library\cite{pjrc} is used to access 1-wire devices made by Maxim/Dallas, such as temperature sensors. For temperature sensors, witch is our case, the DallasTemperature\cite{dallas} library can be used with this library.
 \end{itemize}
 \item Python Language\cite{pylang} is a general-purpose, high-level programming language. Python supports multiple programming paradigms, including object-oriented, imperative and functional programming. It features a dynamic type system and automatic memory management and has a large and comprehensive standard library. The version used is v2.7.9.
 \begin{itemize}
-\item Flask Library\cite{flask}
-\item Schedule Library\cite{schedule}
-\item pySerial Libray\cite{pyserial}
+\item Flask Library\cite{flask} is a micro web application framework for creating simple web RESTful applications.
+\item Schedule Library\cite{schedule} make possible to run Python functions (or any other callable) periodically at pre-determined intervals using a simple, human-friendly syntax.
+\item pySerial Libray\cite{pyserial} facilitates the use of serial port communication in Pyhton applications.
 \end{itemize}
-\item Web Languages: 
+\item Web Languages\cite{moz} are a set of languages that are interpreted by a browser in a rendering process to present the content on a browser screen. 
 \begin{itemize}
-\item HTML5
-\item JavaScript(ECMAScript 5/6)
-\item CSS3
+\item HTML5 or HyperText Markup Language is the language used to describe and define the content of a Web page in a structured format.
+\item JavaScript(ECMAScript 5/6) is the programming language that runs in the browser, which is used to build advanced user interactive Web sites and applications.
+\item CSS3 or Cascading Style Sheets are used to describe the appearance of Web content.
 \end{itemize}
-\item SQL Language: 
+\item SQL or Structured Query Language is a special-purpose programming language designed for managing data held in databases. In our case, InfluxDB database, has a SQL like query language\cite{influxkey} for find and grouping data.
+
 \end{itemize}
 
 In addiction to the programming languages we used a set of technologies as a part of our application as presented in table \ref{tab:tech}.
@@ -226,7 +226,17 @@ On other hand, for establishing communication between the Python server and the 
 
 \subsection{Development Environment}
 
-Raspberry Pi, Arduino, Arduino IDE  + Compiler, Atom, SSH, Python Compiler, ARM architecture , Version Control - Git
+The development environment used depended on the layer that we where working, because different languages/technologies required different environments.
+
+For developing the low level hardware phase, using the Arduino platform, we needed to use the Arduino Software (IDE)\cite{arduinoide}, that compiles the Arduino code, checked for errors and upload it to the Arduino Board.
+
+When developing the Python server application we need to use the Python compiler for analysing Python source code and generating Python bytecode, and the Python IDLE that is the Python IDE built with the Tkinter GUI toolkit. Beside this, when deploying the Python server code on the Raspberry Pi we used  SSH (Secure Shell) to connect with it and, by this way, initiating text-based shell session on the remote machines in a secure way, allowing us to run commands on the machine prompt without the need of being physically present near to the machine.
+
+Another tool that we needed was the Go language compiler (v1.4) because we used InfluxDB, that is written in Go Lang\cite{goinflux}, and we needed to compile it for ARM processor (Raspberry Pi processor architecture).
+
+For developing the client web application and extending the Grafana we used a text editor, more specifically, Visual Studio Code.
+
+Additionally we used Git control version system for sharing/working with code between the members of the working team associated with the GitHub free repository system for students.
 
 \newpage
 \chapter{Conclusion}
@@ -316,6 +326,22 @@ Graphite, InfluxDB \& OpenTSDB},
 \bibitem{pylang}
   \textit{Python},
   \url{https://www.python.org/}
+  
+\bibitem{influxkey}
+  \textit{InfluxDB Query Language},
+  \url{http://influxdb.com/docs/v0.8/api/query_language.html}
+  
+\bibitem{moz}
+  \textit{Web technology for developers}, Mozilla Developer Network,
+  \url{https://developer.mozilla.org/en-US/docs/Web}
+  
+\bibitem{arduinoide}
+  \textit{Arduino Software}, Arduino,
+  \url{http://www.arduino.cc/en/Main/Software}, 2015
+ 
+\bibitem{goinflux}
+  \textit{Contributing InfluxDB}, InfluxDB,
+  \url{https://github.com/influxdb/influxdb/blob/master/CONTRIBUTING.md}, 2015
 \end{thebibliography}
 
 \newpage
@@ -325,84 +351,62 @@ Graphite, InfluxDB \& OpenTSDB},
 \section{Hardware}
 \subsection*{Raspberry Pi}
 
-Chip Broadcom BCM2835 SoC full HD multimedia applications processor
+Technical Specs:
+\begin{itemize}
+\item Chip: Broadcom BCM2835 SoC full HD multimedia applications processor
+\item CPU: 700 MHz Low Power ARM1176JZ-F Applications Processor
+\item GPU: Dual Core VideoCore IV® Multimedia Co-Processor
+\item Memory: 512MB SDRAM
+\item Ethernet: onboard 10/100 Ethernet RJ45 jack
+\item USB: 2.0 Dual USB Connector
+\item Video Output: HDMI (rev 1.3 \& 1.4) Composite RCA (PAL and NTSC)
+\item Audio Output: 3.5mm jack, HDMI
+\item Onboard Storage: SD, MMC, SDIO card slot
+\item Operating System: Linux (Raspbian OS)
+\item Dimensions: 8.6cm x 5.4cm x 1.7cm
+\end{itemize}
 
-CPU 700 MHz Low Power ARM1176JZ-F Applications Processor
-
-GPU	Dual Core VideoCore IV® Multimedia Co-Processor
-	  	
-Memory 512MB SDRAM
-
-Ethernet onboard 10/100 Ethernet RJ45 jack
-
-USB 2.0 Dual USB Connector
-
-Video Output HDMI (rev 1.3 \& 1.4) Composite RCA (PAL and NTSC)
-
-Audio Output 3.5mm jack, HDMI
-
-Onboard Storage SD, MMC, SDIO card slot
-
-Operating System Linux
-
-Dimensions 8.6cm x 5.4cm x 1.7cm
 \subsection*{Arduino}
 
-Specifications:
-
-Microcontroller	Atmel ATmega328
-
-Operating Voltage (logic level)	5 V
-
-Input Voltage (recommended)	7-12 V
-
-Input Voltage (limits)	6-20 V
-
-Digital I/O Pins	14 (of which 6 provide PWM output)
-
-Analog Input Pins	8
-
-DC Current per I/O Pin	40 mA
-
-Flash Memory	32 KB (ATmega328) of which 2 KB used by bootloader
-
-SRAM  2 KB (ATmega328)
-
-EEPROM	1 KB (ATmega328)
-
-Clock Speed	16 MHz
-
-Dimensions	0.73" x 1.70"
-
-Length	45 mm
-
-Width	18 mm
-
-Weigth	5 g
-
+Technical Specs:
+\begin{itemize}
+\item Microcontroller: Atmel ATmega328
+\item Operating Voltage (logic level): 5 V
+\item Input Voltage (recommended): 7-12 V
+\item Input Voltage (limits): 6-20 V
+\item Digital I/O Pins: 14 (of which 6 provide PWM output)
+\item Analog Input Pins: 8
+\item DC Current per I/O Pin: 40 mA
+\item Flash Memory:	32 KB of which 2 KB used by bootloader
+\item SRAM: 2 KB 
+\item EEPROM: 1 KB
+\item Clock Speed: 16 MHz
+\item Dimensions: 0.73" x 1.70"
+\item Length: 45 mm
+\item Width: 18 mm
+\item Weigth: 5 g
+\end{itemize}
 \subsection*{Sensor DHT11}
 Technical specs:
 \begin{itemize}
-\item Low cost
-\item  3 to 5V power and I/O
-\item   2.5mA max current use during conversion (while requesting data)
-\item  Good for 20-80\% humidity readings with 5\% accuracy
- \item   Good for 0-50C temperature readings +- 2C accuracy
- \item   No more than 1 Hz sampling rate (once every second)
- \item   Body size 15.5mm x 12mm x 5.5mm
- \item   4 pins with 0.1" spacing
-
-    \end{itemize}
+\item 3 to 5V power and I/O
+\item 2.5mA max current use during conversion (while requesting data)
+\item Good for 20-80\% humidity readings with 5\% accuracy
+\item Good for 0-50ºC temperature readings +- 2ºC accuracy
+\item No more than 1 Hz sampling rate (once every second)
+\item Body size 15.5mm x 12mm x 5.5mm
+\item 4 pins with 0.1" spacing
+\end{itemize}
 
 \subsection*{Sensor DS18B20}
 Technical specs:
 \begin{itemize}
-\item Usable temperature range: -55 to 125 C (-67F to +257F)
+\item Usable temperature range: -55 to 125 ºC (-67F to +257F)
 \item 9 to 12 bit selectable resolution
 \item Uses 1-Wire interface- requires only one digital pin for communication
 \item Unique 64 bit ID burned into chip
 \item Multiple sensors can share one pin
-\item +-0.5C Accuracy from -10C to +85C
+\item +-0.5C Accuracy from -10ºC to +85ºC
 \item Temperature-limit alarm system
 \item Query time is less than 750ms
 \item Usable with 3.0V to 5.5V power/data
@@ -410,9 +414,9 @@ Technical specs:
 \subsection*{Sound Sensor (LM393)}
 Technical specs:
 \begin{itemize}
-\item LM393 (?)
+\item LM393 Controller
 \item Electret microphone
-\item Working voltage: DC 4 ~ 6 V
+\item Working voltage: DC 4 - 6 V
 \item With a signal output instruction
 \item One single channel output
 \item Low level output signal
