@@ -42,8 +42,8 @@ João Pedro Matos Teixeira Dias - 201106781 (ei11137@fe.up.pt)\\
  
 \date{\today}
 \begin{document}
-\maketitle
-
+\clearpage\maketitle
+\thispagestyle{empty}
 %************************************************************************************************
 %************************************************************************************************
 
@@ -167,24 +167,28 @@ The design is based around a Broadcom BCM2835 SoC, which includes an ARM1176JZF-
 
 \subsection{Programming Languages and Technologies}
 
-In the context of realizing this project it was conciliated a diversity of technologies and programming languages that, working together in the architecture presented at fig. \ref{fig:arc}, made the application possible. Starting by enumerating the programming languages used and the reasons for choosing those languages is presented in the table \ref{tab:prolangs}.
-
-
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{ |l|X| }
-  	\hline
-  	Arduino  & C/C++  \\
- 	\hline
- 	Python  & item 2   \\
-  	\hline
- 	Web Languages  & HTML,JS,CSS   \\
-	\hline
-	SQL  & InfluxDB   \\
-	\hline
-\end{tabularx}
-	\caption{Programming languages.}
-  	\label{tab:prolangs}
-\end{table}
+In the context of realizing this project it was conciliated a diversity of technologies and programming languages that, working together in the architecture presented at fig. \ref{fig:arc}, made the application possible. Starting by enumerating the programming languages used and the reasons for choosing those languages are the following.
+\begin{itemize}
+\item Arduino Language\cite{arduinolang} is a low level language based on C/C++ and integrated with AVR Libc\cite{avr} and allows the use of any of its functions for interacting with hardware. Since its a derivative language of C/C++ it has a multi-paradigm design being imperative and object-oriented. The version used is v1.6.4. 
+\begin{itemize}
+\item DHT Library\cite{dhtada}
+\item OneWire Library\cite{pjrc}
+\item Dallas Temperature Control Library\cite{dallas}
+\end{itemize}
+\item Python Language\cite{pylang} is a general-purpose, high-level programming language. Python supports multiple programming paradigms, including object-oriented, imperative and functional programming. It features a dynamic type system and automatic memory management and has a large and comprehensive standard library. The version used is v2.7.9.
+\begin{itemize}
+\item Flask Library\cite{flask}
+\item Schedule Library\cite{schedule}
+\item pySerial Libray\cite{pyserial}
+\end{itemize}
+\item Web Languages: 
+\begin{itemize}
+\item HTML5
+\item JavaScript(ECMAScript 5/6)
+\item CSS3
+\end{itemize}
+\item SQL Language: 
+\end{itemize}
 
 In addiction to the programming languages we used a set of technologies as a part of our application as presented in table \ref{tab:tech}.
 
@@ -205,10 +209,6 @@ In addiction to the programming languages we used a set of technologies as a par
 	\caption{Technologies.}
   	\label{tab:tech}
 \end{table}
-
--Python lib's (?)
-
--Arduino lib's (?)
 
 \section{Implementation Description}
 
@@ -284,6 +284,38 @@ with no external dependencies},
   \textit{Grafana}, \emph{An open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB \& OpenTSDB},
   \url{http://grafana.org/}
+  
+\bibitem{dallas}
+  \textit{Dallas Temperature Control Library},
+  \url{http://milesburton.com/Main_Page?title=Dallas_Temperature_Control_Library}
+  
+\bibitem{dhtada}
+  \textit{Using a DHTxx Sensor}, Adafruit Industries,
+  \url{https://learn.adafruit.com/dht/using-a-dhtxx-sensor}
+  
+\bibitem{pjrc}
+  \textit{OneWire Library}, Jim Studt,
+  \url{http://www.pjrc.com/teensy/td_libs_OneWire.html}, 2007
+  
+\bibitem{flask}
+  \textit{Flaks}, Armin Ronacher,
+  \url{http://flask.pocoo.org/}, 2014
+
+\bibitem{schedule}
+  \textit{Python job scheduling for humans}, Daniel Bader,
+  \url{https://github.com/dbader/schedule}
+  
+\bibitem{arduinolang}
+  \textit{Arduino Language Reference},
+  \url{http://www.arduino.cc/en/Reference/HomePage}
+  
+\bibitem{avr}
+  \textit{AVR Libc Modules},
+  \url{http://www.nongnu.org/avr-libc/user-manual/modules.html}
+  
+\bibitem{pylang}
+  \textit{Python},
+  \url{https://www.python.org/}
 \end{thebibliography}
 
 \newpage
