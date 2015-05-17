@@ -108,7 +108,7 @@ This way the user can have absolute control of the room where \textit{aWarehouse
 \end{figure}
 
 \begin{table}[H]
-\begin{tabularx}{0.85\textwidth}{ |l|X|p{3cm}| }
+\begin{tabularx}{\textwidth}{ |l|X|p{3cm}| }
   	\hline
   	\textbf{Sensor}  & \textbf{Description} & \textbf{Input/Output} \\
  	\hline
@@ -171,7 +171,7 @@ In the context of realizing this project it was conciliated a diversity of techn
 
 
 \begin{table}[H]
-\begin{tabularx}{0.8\textwidth}{ |l|X| }
+\begin{tabularx}{\textwidth}{ |l|X| }
   	\hline
   	Arduino  & C/C++  \\
  	\hline
@@ -189,13 +189,17 @@ In the context of realizing this project it was conciliated a diversity of techn
 In addiction to the programming languages we used a set of technologies as a part of our application as presented in table \ref{tab:tech}.
 
 \begin{table}[H]
-\begin{tabularx}{0.8\textwidth}{ |l|X| }
+\begin{tabularx}{\textwidth}{ |l|X| }
   	\hline
-  	InfluxDB  &   \\
+  	InfluxDB & InfluxDB\cite{influx} is a time series, metrics, and analytics database. It’s written in Go and its oriented for recording events data, like data from sensors.\\
  	\hline
- 	Grafana  &   \\
+ 	Grafana & Grafana\cite{grafana} is an open-source metrics dashboard with direct integration with various databases like InfluxDB.\\
   	\hline
- 	Web API's & Twilio, Mandrill, Forecast.io   \\
+ 	Web API's &\begin{itemize}
+ 	\item Forecast.io: Weather forecast RESTful API that returns the current weather conditions for a specific location (Latitude, Longitude)
+ 	\item Twilio: Simple RESTful API for sending text messages (SMS).
+ 	\item Mandrill: Powerful, scalable, and affordable email infrastructure as a service, using a RESTful API: 
+ 	\end{itemize}   \\
 	\hline
 \end{tabularx}
 	\caption{Technologies.}
@@ -248,7 +252,7 @@ Although we think that \textit{aWareHouse} is almost ready to market at this sta
 
 We see this points as growing space, and possibility of make a better application for the final user.
 
-\renewcommand\bibname{Bibliography}
+\renewcommand\bibname{References}
 \begin{thebibliography}{}
 
 \bibitem{twilioapi}
@@ -264,12 +268,22 @@ We see this points as growing space, and possibility of make a better applicatio
   \url{http://mandrillapp.com/api/docs}
   
 \bibitem{serial}
-  Arduino,\emph{Serial},
+  Arduino, \emph{Serial},
   \url{http://www.arduino.cc/en/reference/serial}
   
 \bibitem{pyserial}
-  \textit{pySerial},\emph{pySerial’s documentation},
+  \textit{pySerial}, \emph{pySerial’s documentation},
   \url{http://pyserial.sourceforge.net/}
+  
+\bibitem{influx}
+  \textit{InfluxDB}, \emph{An open-source, distributed, time series database
+with no external dependencies},
+  \url{http://influxdb.com/}
+  
+\bibitem{grafana}
+  \textit{Grafana}, \emph{An open source, feature rich metrics dashboard and graph editor for
+Graphite, InfluxDB \& OpenTSDB},
+  \url{http://grafana.org/}
 \end{thebibliography}
 
 \newpage

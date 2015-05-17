@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {2.2.2}Development Environment}{10}
 \contentsline {chapter}{\numberline {3}Conclusion}{11}
 \contentsline {chapter}{\numberline {4}Improvements}{12}
-\contentsline {chapter}{Bibliography}{13}
+\contentsline {chapter}{References}{13}
 \contentsline {chapter}{Appendices}{14}
 \contentsline {chapter}{\numberline {A}Appendix}{15}
 \contentsline {section}{\numberline {A.1}Hardware}{15}
