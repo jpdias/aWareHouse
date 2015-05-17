@@ -17,29 +17,32 @@
 \usepackage{caption}
 \usepackage{titlesec}
 \titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\bf}
-
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3} 
 
-\begin{document}
-\setlength{\textwidth}{16cm}
-\setlength{\textheight}{22cm}
-\title{\huge{\textbf{\textit{aWareHouse}}}\linebreak
+%%% Maketitle metadata
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
+
+\title{
+\huge{\textbf{\textit{aWareHouse}}}\linebreak
 \Large\textbf{\\Environment Control System for Warehouses}\linebreak\linebreak\linebreak
 \includegraphics[width=8cm]{feup.pdf}\linebreak \linebreak
 \large{MSc in Informatics and Computer Engineering} \linebreak
 \large{Programming Paradigms \\ EIC0065-2S}\linebreak
 }
+
 \author{
 Duarte Nuno Pereira Duarte - 201109179 (ei11101@fe.up.pt)\\
 Hugo José Freixo Rodrigues - 201108059 (ei11086@fe.up.pt)\\
 João Pedro Matos Teixeira Dias - 201106781 (ei11137@fe.up.pt)\\
 \\
 \\ Faculdade de Engenharia da Universidade do Porto \\ Rua Roberto Frias, s\/n, 4200-465 Porto, Portugal
- \vspace{1cm}}
-%\date{Junho de 2007}
+}
+ 
+\date{\today}
+\begin{document}
 \maketitle
-\thispagestyle{empty}
 
 %************************************************************************************************
 %************************************************************************************************
@@ -207,9 +210,15 @@ In addiction to the programming languages we used a set of technologies as a par
 
 \subsection{Implementation Details}
 
-Socket communication over usb (Python - Arduino (c/c++))
+This project had the need of using and establishing a diversity of API's (Application Programming Interface) for communication between the different application layers and external services used.
 
-HTTP REST protocol  (web application - python server - InfluxDB - external API's - JSON)
+On one hand, we used various RESTful API for accessing external services (Mandrill\cite{mandrillapi},Forecast.io\cite{fcapi} and Twilio\cite{twilioapi}) as refereed in table \ref{tab:tech}. The RESTful stands for Representational State Transfer, that consists in using the standard HTTP operations for communication data in JSON or XML format. In our case, the external services used can communicate using JSON (JavaScript Object Notation) messages for requesting and pushing data.
+
+Additionally we standardize a REST API for communicating with the Python server from our web application.
+
+On other hand, for establishing communication between the Python server and the Arduino we needed to use Serial Port communication using the Arduino serial port\cite{serial}, and a Python library called \textit{pySerial}\cite{pyserial}. For this we standardized a system of request/response were we passed a character that expressed the operation wanted and the Arduino responded using a JSON string with the values requested. The serial port communication is emulated above an USB port.
+
+
 
 \subsection{Development Environment}
 
@@ -218,29 +227,57 @@ Raspberry Pi, Arduino, Arduino IDE  + Compiler, Atom, SSH, Python Compiler, ARM 
 \newpage
 \chapter{Conclusion}
 
-almost ready to market (?), easy to expand or adapt, usefulness of programming paradigms, big data and internet of things
+The \textit{aWareHouse} project was designed to take advantage of different programming paradigms in a way that resulted in a stable product, using various programming languages, frameworks, libraries and technologies. 
+
+In a way of summary, we used low-level programming for Arduino and sensors, taking advantages of imperative paradigm. For the server that communicates with the web application and the Arduino we used Python that is a multi-paradigm language (object-oriented, imperative and functional). For the web application itself we used the standard web technologies (JavaScript, HTML and CSS). JavaScript, principally, is know for being another multi-paradigm language (scripting, object-oriented with prototypes, imperative and functional).
+
+The actual result was a solution that can easily adapted for the market with a relative good precision, trustability and stability. Additionally it is easy adaptable and/or extendible with new functionalities (sensors for example).
+
+This project fits in a time that we start to hear everyday more about \textit{Internet Of Things} and \textit{Big Data}, and the possibilities that this brings to us. We conciliated this two big thematics and give the user the power to watch and be aware of a warehouse or any confined space, and, at the same time, be capable of see the past data and the influence of external conditions in inside environment.
 
 \newpage
 \chapter{Improvements}
 
-Motion, better management of storage (slow), advice system (?), better safety (credentials)
-\newpage
-\chapter{Resources}
-\section{\it{Bibliography}}
-\begin{description}
-\item Visual Studio 2013 Ultimate, Microsoft, \url{http://www.visualstudio.com/}.
-\end{description}
-\section{\it{Software}}
-\begin{description}
-\item Visual Studio 2013 Ultimate, Microsoft, \url{http://www.visualstudio.com/}.
-\end{description}
+Although we think that \textit{aWareHouse} is almost ready to market at this stage we already found space for improvement and evolution, namely:
+\begin{itemize}
+ \item Addition of more and basic sensors like, for example, a motion sensor.
+ \item The storage system has to be improved since that with the accumulation of past data the system can be really slow.
+ \item Possibility of integrate some automatic advice system, using artificial intelligence, that provides the user advices on what to change to make the environment more cold for example.
+ \item Improve the security of application creating user accounts and better data protection.
+\end{itemize} 
+
+We see this points as growing space, and possibility of make a better application for the final user.
+
+\renewcommand\bibname{Bibliography}
+\begin{thebibliography}{}
+
+\bibitem{twilioapi}
+  \emph{Twilio REST Web Service Interface},
+  \url{http://www.twilio.com/docs/api/rest}
+  
+\bibitem{fcapi}
+  \emph{The Dark Sky Forecast API},
+  \url{http://developer.forecast.io/docs/v2}
+  
+\bibitem{mandrillapi}
+  \emph{Mandrill API Documentation},
+  \url{http://mandrillapp.com/api/docs}
+  
+\bibitem{serial}
+  Arduino,\emph{Serial},
+  \url{http://www.arduino.cc/en/reference/serial}
+  
+\bibitem{pyserial}
+  \textit{pySerial},\emph{pySerial’s documentation},
+  \url{http://pyserial.sourceforge.net/}
+\end{thebibliography}
 
 \newpage
 
 \begin{appendices}
 \chapter{Appendix}
 \section{Hardware}
-\subsection{Raspberry Pi}
+\subsection*{Raspberry Pi}
 
 Chip Broadcom BCM2835 SoC full HD multimedia applications processor
 
@@ -263,7 +300,7 @@ Onboard Storage SD, MMC, SDIO card slot
 Operating System Linux
 
 Dimensions 8.6cm x 5.4cm x 1.7cm
-\subsection{Arduino}
+\subsection*{Arduino}
 
 Specifications:
 
@@ -297,7 +334,7 @@ Width	18 mm
 
 Weigth	5 g
 
-\subsection{Sensor DHT11}
+\subsection*{Sensor DHT11}
 Technical specs:
 \begin{itemize}
 \item Low cost
@@ -311,7 +348,7 @@ Technical specs:
 
     \end{itemize}
 
-\subsection{Sensor DS18B20}
+\subsection*{Sensor DS18B20}
 Technical specs:
 \begin{itemize}
 \item Usable temperature range: -55 to 125 C (-67F to +257F)
@@ -324,7 +361,7 @@ Technical specs:
 \item Query time is less than 750ms
 \item Usable with 3.0V to 5.5V power/data
 \end{itemize}
-\subsection{Sound Sensor (LM393)}
+\subsection*{Sound Sensor (LM393)}
 Technical specs:
 \begin{itemize}
 \item LM393 (?)
@@ -335,7 +372,7 @@ Technical specs:
 \item Low level output signal
 \item When there is sound output low, lights lit
 \end{itemize}
-\subsection{Diffused Led}
+\subsection*{Diffused Led}
 Technical specs:
 \begin{itemize}
 \item 10mm diameter
@@ -344,7 +381,7 @@ Technical specs:
 \item 50 degree viewing angle.
 \item Red: 700 mcd typical brightness, Green: 2100 mcd, Blue: 900 mcd
 \end{itemize}
-\subsection{Photo cell (CdS photoresistor)}
+\subsection*{Photo cell (CdS photoresistor)}
 Technical specs:
 \begin{itemize}
 \item When its light, the resistance is about 5-10KOhm, when dark it goes up to 200KOhm.

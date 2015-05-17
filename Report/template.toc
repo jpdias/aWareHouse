@@ -9,19 +9,10 @@
 \contentsline {subsection}{\numberline {2.1.3}Programming Languages and Technologies}{8}
 \contentsline {section}{\numberline {2.2}Implementation Description}{9}
 \contentsline {subsection}{\numberline {2.2.1}Implementation Details}{9}
-\contentsline {subsection}{\numberline {2.2.2}Development Environment}{9}
-\contentsline {chapter}{\numberline {3}Conclusion}{10}
-\contentsline {chapter}{\numberline {4}Improvements}{11}
-\contentsline {chapter}{\numberline {5}Resources}{12}
-\contentsline {section}{\numberline {5.1}\it {Bibliography}}{12}
-\contentsline {section}{\numberline {5.2}\it {Software}}{12}
-\contentsline {chapter}{Appendices}{13}
-\contentsline {chapter}{\numberline {A}Appendix}{14}
-\contentsline {section}{\numberline {A.1}Hardware}{14}
-\contentsline {subsection}{\numberline {A.1.1}Raspberry Pi}{14}
-\contentsline {subsection}{\numberline {A.1.2}Arduino}{14}
-\contentsline {subsection}{\numberline {A.1.3}Sensor DHT11}{15}
-\contentsline {subsection}{\numberline {A.1.4}Sensor DS18B20}{15}
-\contentsline {subsection}{\numberline {A.1.5}Sound Sensor (LM393)}{16}
-\contentsline {subsection}{\numberline {A.1.6}Diffused Led}{16}
-\contentsline {subsection}{\numberline {A.1.7}Photo cell (CdS photoresistor)}{16}
+\contentsline {subsection}{\numberline {2.2.2}Development Environment}{10}
+\contentsline {chapter}{\numberline {3}Conclusion}{11}
+\contentsline {chapter}{\numberline {4}Improvements}{12}
+\contentsline {chapter}{Bibliography}{13}
+\contentsline {chapter}{Appendices}{14}
+\contentsline {chapter}{\numberline {A}Appendix}{15}
+\contentsline {section}{\numberline {A.1}Hardware}{15}
