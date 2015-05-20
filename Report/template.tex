@@ -165,6 +165,10 @@ The design is based around a Broadcom BCM2835 SoC, which includes an ARM1176JZF-
     \label{fig:arc}
 \end{figure}
 
+The application base logic architecture, as presented in fig. \ref{fig:arc}, is divided in three principal layers, the low-level layer were the sensors are controlled, the back-end layer were is managed all the data and services, and the front-end layer that is basically the client web application.
+
+Although the Raspberry Pi have a GPIO port (General Purpose Input/Output) capable of interact with the sensors we used, we opted for using a separated controller, an Arduino, for doing that. This is motivated by the need of a real-time system on reading the sensors and there's too much running in Linux to get that kind of accuracy. The Linux kernel dispatcher isn't made to support real-time since there's a massive number of tasks that you simply can't run without.
+
 \subsection{Programming Languages and Technologies}
 
 In the context of realizing this project it was conciliated a diversity of technologies and programming languages that, working together in the architecture presented at fig. \ref{fig:arc}, made the application possible. Starting by enumerating the programming languages used and the reasons for choosing those languages are the following.
