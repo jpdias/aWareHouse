@@ -1,1 +1,43 @@
-{"warning": [{"action": "...", "type": "temperature", "value": 30.5, "op": ">="}, {"type": "humidity", "value": 30.5, "op": ">="}], "config": {"alerts": {"to": 351926826443, "token": "3286cdb06fe619c2e5b0370c11c7b36e", "from": 13522890122, "sid": "ACb1dd53fb177436f10cf05b4f772a262f"}, "db": {"username": "admin", "host": "localhost", "password": "admin", "name": "awarehouse", "port": 8086}, "forecast": {"lat": 41.1492, "api": "111fece1a5a2d1828fb6e795221e2c25", "local": "Porto", "long": -8.6104}, "arduino": {"read_sensors_fast_timer": 5, "read_sensors_timer": 30, "baudrate": 9600, "com_port": "/dev/ttyUSB0", "get_meteo_timer": 120}}}
+{
+  "warnings": [{
+    "action": "...",
+    "type": "temperature",
+    "value": 30.5,
+    "op": ">="
+  }, {
+    "type": "humidity",
+    "value": 30.5,
+    "op": ">="
+  }],
+  "twilio": {
+    "to": "+351963420589",
+    "token": "3286cdb06fe619c2e5b0370c11c7b36e",
+    "from": 13522890122,
+    "sid": "ACb1dd53fb177436f10cf05b4f772a262f"
+  },
+  "mandrill": {
+    "to": "jpdias@live.com.pt",
+    "token": "ILdimrRhRApJRJqDh6HcIg",
+    "from": "dnpd.dd@gmail.com"
+  },
+  "db": {
+    "username": "admin",
+    "host": "localhost",
+    "password": "admin",
+    "name": "awarehouse",
+    "port": 8086
+  },
+  "forecast": {
+    "lat": 41.1492,
+    "api": "111fece1a5a2d1828fb6e795221e2c25",
+    "local": "Porto",
+    "long": -8.6104
+  },
+  "arduino": {
+    "read_sensors_fast_timer": 5,
+    "read_sensors_timer": 30,
+    "baudrate": 9600,
+    "com_port": "/dev/ttyUSB0",
+    "get_meteo_timer": 120
+  }
+}

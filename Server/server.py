@@ -4,6 +4,7 @@ import time
 import json
 import forecastio
 import sys
+import logging
 from flask import Flask, request, jsonify
 from threading import Thread
 from influxdb import InfluxDBClient
@@ -38,20 +39,20 @@ def load_file():
         config = json.load(data_file)
         global client
         client = TwilioRestClient(
-            config['config']['alerts']['sid'], config['config']['alerts']['token'])
+            config['twilio']['sid'], config['twilio']['token'])
         global influxdb
-        influxdb = InfluxDBClient(config['config']['db']['host'], config['config']['db']['port'], config[
-            'config']['db']['username'], config['config']['db']['password'], config['config']['db']['name'])
+        influxdb = InfluxDBClient(config['db']['host'],
+                                  config['db']['port'], config['db']['username'],
+                                  config['db']['password'], config['db']['name'])
         global ser
-        ser = serial.Serial(
-            config['config']['arduino']['com_port'], config['config']['arduino']['baudrate'])
+        ser = serial.Serial(config['arduino']['com_port'], config['arduino']['baudrate'])
         data_file.close()
 
 
 def send_sms(content):
     client.messages.create(
-        to=config['config']['alert']['to'],
-        from_=config['config']['alert']['from'],
+        to=config['twilio']['to'],
+        from_=config['twilio']['from'],
         body=content,
     )
 
@@ -59,7 +60,7 @@ def send_sms(content):
 def get_sensors():
     slow = get_sensors.counter == (
         (
-            config['config']['arduino']['read_sensors_timer'] / config['config']['arduino']['read_sensors_fast_timer']) - 1)
+            config['arduino']['read_sensors_timer'] / config['arduino']['read_sensors_fast_timer']) - 1)
     if slow:
         ser.write('r')
         get_sensors.counter = 0
@@ -76,7 +77,7 @@ def get_sensors():
     try:
         influxdb.write_points(m)
     except:
-        print "Unexpected error InfluxDB:", sys.exc_info()[0]
+        print "Unexpected error InfluxDB:", sys.exc_info()
 
 get_sensors.counter = 0
 
@@ -84,12 +85,12 @@ get_sensors.counter = 0
 def get_meteo():
     try:
         forecast = forecastio.load_forecast(
-            config['config']['forecast']['api'], config['config']['forecast']['lat'],
-            config['config']['forecast']['long'])
+            config['forecast']['api'], config['forecast']['lat'],
+            config['forecast']['long'])
         temp = forecast.currently().temperature
         humi = forecast.currently().humidity * 100
     except:
-        print "Unexpected error Forecast.io:", sys.exc_info()[0]
+        print "Unexpected error Forecast.io:", sys.exc_info()
     else:
         global current_forecast
         current_forecast = {
@@ -134,12 +135,15 @@ def static_proxy(path):
 
 
 if __name__ == '__main__':
+    loglevel = logging.DEBUG
+    logging.basicConfig(format='%(asctime)-15s [%(levelname)s] %(message)s', datefmt='%Y/%m/%d %H:%M:%S', level=loglevel)
+    logging.info('aWarehouse starting...')
     load_file()
     get_meteo()  # init current_forecast
     schedule.every(
-        config['config']['arduino']['read_sensors_fast_timer']).seconds.do(get_sensors)
+        config['arduino']['read_sensors_fast_timer']).seconds.do(get_sensors)
     schedule.every(
-        config['config']['arduino']['get_meteo_timer']).seconds.do(get_meteo)
+        config['arduino']['get_meteo_timer']).seconds.do(get_meteo)
     t = Thread(target=run_schedule)
     t.daemon = True
     t.start()
