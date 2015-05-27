@@ -2,23 +2,23 @@ var loadData;
 
 $.getJSON("/api/config", function(data) {
   loadData = data;
-  for (var key in data.config) {
-    for (var keyCode in data.config[key]) {
+  for (var key in data) {
+    for (var keyCode in data[key]) {
       var sel = "#" + keyCode + "";
-      $(sel).val(data.config[key][keyCode]);
+      $(sel).val(data[key][keyCode]);
     }
   }
 });
 
 $("#submit").on("click", function() {
-  for (var key in loadData.config) {
-    for (var keyCode in loadData.config[key]) {
+  for (var key in loadData) {
+    for (var keyCode in loadData[key]) {
       var sel = "#" + keyCode + "";
       var value = $(sel).val();
       if (!isNaN(value)){
         value = Number(value);
       }
-      loadData.config[key][keyCode] = value;
+      loadData[key][keyCode] = value;
     }
   }
   $.ajax({

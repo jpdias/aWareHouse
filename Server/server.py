@@ -4,6 +4,7 @@ import time
 import json
 import forecastio
 import sys
+import mandrill
 import logging
 from flask import Flask, request, jsonify
 from threading import Thread
@@ -55,6 +56,59 @@ def send_sms(content):
         from_=config['twilio']['from'],
         body=content,
     )
+
+def send_mail(subj, msg):
+    to = config['mandrill']['to']
+    key = config['mandrill']['token']
+
+    kwargs = {'api_key': key,
+              'reply_to': 'dnpd.dd@gmail.com',
+              'recipient': 'Recipient',
+              'from_email': 'dnpd.dd@gmail.com'
+              }
+    post_mail(to=to, msg=msg, subj=subj, **kwargs)
+
+
+def post_mail(to, subj, msg, **kwargs):
+    """ Sends the message by posting to Mandrill API
+
+        @param to: the recipient for the message
+        @type to: str
+
+        @param subj: the subject for the email
+        @type subj: str
+
+        @param msg: the body of the message, in plain text
+        @type msg: str
+
+        @param kwargs: other settings, compliant with Mandrill API
+        @type kwargs: dict
+
+        @see: https://mandrillapp.com/api/docs/
+    """
+    msg = {
+        'from_email': kwargs.get('from_email'),
+        'from_name': 'aWarehouse',
+        'html': '<h3>Automated Alert</h3><p>{msg}</p><h6>Sent via Mandrill API</h6>'.format(msg=msg),
+        'subject': subj,
+        'to': [
+            {'email': to,
+             'type': 'to'
+             }
+        ]
+    }
+    mc = mandrill.Mandrill(kwargs.get('api_key'))
+    try:
+        res = mc.messages.send(msg, async=kwargs.get('async', False))
+        if res and not res[0].get('status') == 'sent':
+            logging.error('Could not send email to {to}; status: {status}, reason: {reason}'
+                          .format(to=to, status=res.get('status', 'unknown'),
+                                  reason=res.get('reject_reason')))
+            exit(1)
+    except mandrill.Error, e:
+        # Mandrill errors are thrown as exceptions
+        logging.error('A mandrill error occurred: {} - {}'.format(e.__class__.__name__, e))
+    logging.info('Message sent to {to}'.format(to=to))
 
 
 def get_sensors():
