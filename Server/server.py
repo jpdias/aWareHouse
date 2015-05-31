@@ -63,23 +63,41 @@ class Throttle(object):
 
         return wrapper
 
-def compare(symbol, val1, val2):
-    if symbol == '>':
+def compare(op, val1, val2):
+    if op == '>':
         return val1 > val2
-    elif symbol == '>=':
+    elif op == '>=':
         return val1 >= val2
-    elif symbol == '<':
+    elif op == '<':
         return val1 < val2
-    elif symbol == '<=':
+    elif op == '<=':
         return val1 <= val2
-    elif symbol == '=':
+    elif op == '=':
         return val1 == val2
     return False
 
+def op_name(op):
+    if op == '>':
+        return 'higher'
+    elif op == '>=':
+        return 'higher or equal'
+    elif op == '<':
+        return 'lower'
+    elif op == '<=':
+        return 'lower or equal'
+    elif op == '=':
+        return 'equal'
+    return None
+
 @Throttle(minutes=1)
-def do_action(action, sensor_value, warning_value):
-    logging.debug('Executing action {action} sensor value {sensor} and warning value {warning}'.format(action=action, sensor=sensor_value, warning=warning_value))
-    message = 'Warning bla'
+def do_action(action, type, op, sensor_value, warning_value):
+    logging.debug('Executing action {action} sensor value {sensor} and warning value {warning}'.format(action=action,
+                                                                                                       sensor=sensor_value,
+                                                                                                       warning=warning_value))
+    message = 'Warning: {type} value {sensor} is {op} than configured warning level {warning}'.format(type=type,
+                                                                                                      sensor=sensor_value,
+                                                                                                      op=op_name(op),
+                                                                                                      warning=warning_value)
     if action == 'mail':
         send_mail('aWarehouse warning', message)
     elif action == 'sms':
@@ -139,11 +157,12 @@ def send_sms(content):
 def send_mail(subj, msg):
     to = config['mandrill']['to']
     key = config['mandrill']['token']
+    from_email = config['mandrill']['from']
 
     kwargs = {'api_key': key,
-              'reply_to': 'dnpd.dd@gmail.com',
+              'reply_to': from_email,
               'recipient': 'Recipient',
-              'from_email': 'dnpd.dd@gmail.com'
+              'from_email': from_email
               }
     post_mail(to=to, msg=msg, subj=subj, **kwargs)
 

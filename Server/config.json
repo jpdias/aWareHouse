@@ -4,6 +4,11 @@
     "type": "temperature",
     "value": 20,
     "op": ">="
+  },{
+    "action": "mail",
+    "type": "sound",
+    "value": 1,
+    "op": ">"
   }],
   "twilio": {
     "to": "+351963420589",
@@ -12,7 +17,7 @@
     "sid": "ACb1dd53fb177436f10cf05b4f772a262f"
   },
   "mandrill": {
-    "to": "jpdias@live.com.pt",
+    "to": "duarteduarte0@hotmail.com",
     "token": "ILdimrRhRApJRJqDh6HcIg",
     "from": "dnpd.dd@gmail.com"
   },
