@@ -2,12 +2,12 @@
   "warnings": [{
     "action": "sms",
     "type": "temperature",
-    "value": 20,
-    "op": ">="
+    "value": 40,
+    "op": ">"
   },{
     "action": "mail",
     "type": "sound",
-    "value": 1,
+    "value": 500,
     "op": ">"
   }],
   "twilio": {
