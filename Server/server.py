@@ -1,17 +1,17 @@
-import serial
-import schedule
 import time
 import json
-import forecastio
-import sys
-import mandrill
 import logging
-from flask import Flask, request, jsonify
 from threading import Thread
-from influxdb import InfluxDBClient
-from twilio.rest import TwilioRestClient
 from datetime import datetime, timedelta
 from functools import wraps
+
+import serial
+import schedule
+import forecastio
+import mandrill
+from flask import Flask, request, jsonify
+from influxdb import InfluxDBClient
+from twilio.rest import TwilioRestClient
 
 try:
     from flask.ext.cors import CORS  # The typical way to import flask-cors
@@ -19,8 +19,8 @@ except ImportError:
     # Path hack allows examples to be run without installation.
     import os
 
-    parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    os.sys.path.insert(0, parentdir)
+    parentDir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.sys.path.insert(0, parentDir)
     from flask.ext.cors import CORS
 
 FILE_NAME = "config.json"
@@ -34,6 +34,7 @@ app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
 
+
 class Throttle(object):
     """
     Decorator that prevents a function from being called more than once every
@@ -45,6 +46,7 @@ class Throttle(object):
         def my_fun():
             pass
     """
+
     def __init__(self, seconds=0, minutes=0, hours=0):
         self.throttle_period = timedelta(
             seconds=seconds, minutes=minutes, hours=hours
@@ -63,6 +65,7 @@ class Throttle(object):
 
         return wrapper
 
+
 def compare(op, val1, val2):
     if op == '>':
         return val1 > val2
@@ -75,6 +78,7 @@ def compare(op, val1, val2):
     elif op == '=':
         return val1 == val2
     return False
+
 
 def op_name(op):
     if op == '>':
@@ -89,19 +93,23 @@ def op_name(op):
         return 'equal'
     return None
 
+
 @Throttle(minutes=1)
-def do_action(action, type, op, sensor_value, warning_value):
-    logging.debug('Executing action {action} sensor value {sensor} and warning value {warning}'.format(action=action,
-                                                                                                       sensor=sensor_value,
-                                                                                                       warning=warning_value))
-    message = 'Warning: {type} value {sensor} is {op} than configured warning level {warning}'.format(type=type,
-                                                                                                      sensor=sensor_value,
-                                                                                                      op=op_name(op),
-                                                                                                      warning=warning_value)
+def do_action(action, sensor_type, op, sensor_value, warning_value):
+    logging.debug(
+        'Executing action {action} sensor value {sensor} and warning value {warning}'.format(action=action,
+                                                                                             sensor=sensor_value,
+                                                                                             warning=warning_value))
+    message = \
+        'Warning: {type} value {sensor} is {op} than configured warning level {warning}'.format(type=sensor_type,
+                                                                                                sensor=sensor_value,
+                                                                                                op=op_name(op),
+                                                                                                warning=warning_value)
     if action == 'mail':
         send_mail('aWarehouse warning', message)
     elif action == 'sms':
         send_sms(message)
+
 
 def check_alerts(conf, sensors):
     logging.debug('Checking alerts')
@@ -109,16 +117,18 @@ def check_alerts(conf, sensors):
         action = w['action']
         op = w['op']
         warning_value = w['value']
-        type = w['type']
-        sensor_value = get_warning_value(sensors, type)
-        logging.debug('Checking alerts action {action} {sensor} {op} {warning}'.format(action=action, sensor=sensor_value, op=op, warning=warning_value))
+        sensor_type = w['type']
+        sensor_value = get_sensor_value(sensors, sensor_type)
+        logging.debug('Checking alerts action {action} {sensor} {op} {warning}'.format(action=action,
+                                                                                       sensor=sensor_value,
+                                                                                       op=op, warning=warning_value))
         if warning_value is None:
             continue
         if compare(op, sensor_value, warning_value):
             do_action(action, type, op, sensor_value, warning_value)
 
 
-def get_warning_value(sensors, type):
+def get_sensor_value(sensors, sensor_type):
     names = {
         'temperature': ['sensors', 'temp1'],
         'humidity': ['sensors', 'humidity'],
@@ -127,8 +137,8 @@ def get_warning_value(sensors, type):
         'sound': ['sensors_fast', 'sound']
     }
     for sensor in sensors:
-        if sensor['name'] == names[type][0]:
-            return sensor['points'][0][sensor['columns'].index(names[type][1])]
+        if sensor['name'] == names[sensor_type][0]:
+            return sensor['points'][0][sensor['columns'].index(names[sensor_type][1])]
     return None
 
 
@@ -154,6 +164,7 @@ def send_sms(content):
         from_=config['twilio']['from'],
         body=content,
     )
+
 
 def send_mail(subj, msg):
     to = config['mandrill']['to']
@@ -234,6 +245,7 @@ def get_sensors():
 
     check_alerts(config, m)
 
+
 get_sensors.counter = 0
 
 
@@ -291,7 +303,9 @@ def static_proxy(path):
 
 if __name__ == '__main__':
     loglevel = logging.DEBUG
-    logging.basicConfig(format='%(asctime)-15s [%(levelname)s] %(message)s', datefmt='%Y/%m/%d %H:%M:%S', level=loglevel)
+    logging.basicConfig(format='%(asctime)-15s [%(levelname)s] %(message)s',
+                        datefmt='%Y/%m/%d %H:%M:%S',
+                        level=loglevel)
     logging.info('aWarehouse starting...')
     load_file()
     get_meteo()  # init current_forecast
