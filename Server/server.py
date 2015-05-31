@@ -90,8 +90,8 @@ def check_alerts(conf, sensors):
     for w in conf['warnings']:
         action = w['action']
         op = w['op']
-        sensor_value = w['value']
-        warning_value = get_warning_value(sensors, w['type'])
+        warning_value = w['value']
+        sensor_value = get_warning_value(sensors, w['type'])
         logging.debug('Checking alerts action {action} {sensor} {op} {warning}'.format(action=action, sensor=sensor_value, op=op, warning=warning_value))
         if warning_value is None:
             continue
