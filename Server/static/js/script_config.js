@@ -12,7 +12,7 @@ $.getJSON("/api/config", function(data) {
   
   data.warnings.forEach(function(warning, i) {
     if (i != 0) {
-      $(".warning")[0].clone(true, true).insertAfter(".warning:last");
+      $(".warning:first").clone(true, true).insertAfter(".warning:last");
     }
     var lastWarning = $(".warning:last");
     for (var key in warning) {
