@@ -36,7 +36,7 @@ $("#submit").on("click", function() {
   }
 
   if (loadData && loadData["warnings"])
-    loadData["warnings"].clear();
+    loadData["warnings"] = [];
 
   var rows = $("#warnings").children();
   for (var i = 0; i < rows.length; i++) {
