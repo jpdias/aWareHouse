@@ -25,35 +25,35 @@
           <div class="form-group">
             <label class="col-md-4 control-label">COM Port</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="com_port" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="arduino-com_port" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Baudrate</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="number" class="form-control" id="baudrate" placeholder="">
+              <input style="margin-left: 1%;" type="number" class="form-control" id="arduino-baudrate" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Read Sensors Timer</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="number" class="form-control" id="read_sensors_timer" placeholder="">
+              <input style="margin-left: 1%;" type="number" class="form-control" id="arduino-read_sensors_timer" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Read Sensors Fast Timer</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="number" class="form-control" id="read_sensors_fast_timer" placeholder="">
+              <input style="margin-left: 1%;" type="number" class="form-control" id="arduino-read_sensors_fast_timer" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Meteo Timer</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="number" class="form-control" id="get_meteo_timer" placeholder="">
+              <input style="margin-left: 1%;" type="number" class="form-control" id="arduino-get_meteo_timer" placeholder="">
             </div>
           </div>
           <br>
@@ -67,35 +67,35 @@
           <div class="form-group">
             <label class="col-md-4 control-label">Host</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="host" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="database-host" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Port</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="number" class="form-control" id="port" placeholder="">
+              <input style="margin-left: 1%;" type="number" class="form-control" id="database-port" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Name</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="name" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="database-name" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Password</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="password" class="form-control" id="password" placeholder="">
+              <input style="margin-left: 1%;" type="password" class="form-control" id="database-password" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Username</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="username" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="database-username" placeholder="">
             </div>
           </div>
           <br>
@@ -109,63 +109,91 @@
           <div class="form-group">
             <label class="col-md-4 control-label">API Key</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="api" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="forecast-api" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Latitute</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="lat" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="forecast-lat" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Longitute</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="long" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="forecast-long" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Local</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="local" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="forecast-local" placeholder="">
             </div>
           </div>
           <br>
         </div>
       </div>
       <div style="width: 45%; float: left;">
-        <h3 class="text-center">Alerts</h3>
+        <h3 class="text-center">Twilio</h3>
         <br>
 
-        <div id="alerts">
+        <div id="twilio">
           <div class="form-group">
             <label class="col-md-4 control-label">To</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="to" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="twilio-to" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">From</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="from" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="twilio-from" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">SID</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="sid" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="twilio-sid" placeholder="">
             </div>
           </div>
           <br>
           <div class="form-group">
             <label class="col-md-4 control-label">Token</label>
             <div class="col-md-8">
-              <input style="margin-left: 1%;" type="text" class="form-control" id="token" placeholder="">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="twilio-token" placeholder="">
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <div style="width: 45%; float: left;">
+        <h3 class="text-center">Mandrill</h3>
+        <br>
+
+        <div id="mandrill">
+          <div class="form-group">
+            <label class="col-md-4 control-label">To</label>
+            <div class="col-md-8">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="mandrill-to" placeholder="">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="col-md-4 control-label">From</label>
+            <div class="col-md-8">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="mandrill-from" placeholder="">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="col-md-4 control-label">Token</label>
+            <div class="col-md-8">
+              <input style="margin-left: 1%;" type="text" class="form-control" id="mandrill-token" placeholder="">
             </div>
           </div>
           <br>
@@ -173,7 +201,33 @@
       </div>
     </form>
 
-    <button id="submit" class="btn btn-primary large">Submit</button>
+    <div>
+        <h3 class="text-center">Alerts/Warnings</h3>
+        <br>
+
+        <div id="warnings">
+          <p class="warning">
+            If <select name="type" style="margin-left: 5px;  margin-right: 5px; width: unset;">
+                <option value="temperature">temperature</option>
+                <option value="humidity">humidity</option>
+                <option value="brightness">brightness</option>
+                <option value="heat">heat Index</option>
+                <option value="sound">sound Level</option>
+              </select> is <select name="op" style="margin-left: 5px; margin-right: 5px; width: unset;">
+                <option value=">=">higher or equal</option>
+                <option value=">">higher</option>
+                <option value="=">equal</option>
+                <option value="<">lower or equal</option>
+                <option value="<=">lower</option>
+              </select> than <input name="value" type="number" style="margin-left: 5px;  margin-right: 5px; width: 50px;"> send <select name="action" style="margin-left: 5px; width: unset;">
+                <option value="sms">SMS</option>
+                <option value="mail">email</option>
+              </select> <i class="icon-plus-sign add_warning"></i>  <i class="icon-minus-sign remove_warning"></i>
+          </p>
+        </div>
+      </div>
+
+    <button id="submit" class="btn btn-primary large" style="float: right;">Submit</button>
   </div>
 </body>
 <script src="js/jquery.js"></script>
