@@ -16,7 +16,7 @@ $.getJSON("/api/config", function(data) {
     }
     var lastWarning = $(".warning:last");
     for (var key in warning) {
-      if (key.hasOwnProperty(warning)) {
+      if (warning.hasOwnProperty(key)) {
         lastWarning.find("[name=" + key +"]").val(warning[key]);
       }
     }
