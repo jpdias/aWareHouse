@@ -10,7 +10,8 @@ from flask import Flask, request, jsonify
 from threading import Thread
 from influxdb import InfluxDBClient
 from twilio.rest import TwilioRestClient
-from decimal import Decimal
+from datetime import datetime, timedelta
+from functools import wraps
 
 try:
     from flask.ext.cors import CORS  # The typical way to import flask-cors
@@ -32,6 +33,84 @@ ser = None
 app = Flask(__name__, static_url_path='/static')
 app.debug = True
 cors = CORS(app)
+
+class Throttle(object):
+    """
+    Decorator that prevents a function from being called more than once every
+    time period.
+
+    To create a function that cannot be called more than once a minute:
+
+        @Throttle(minutes=1)
+        def my_fun():
+            pass
+    """
+    def __init__(self, seconds=0, minutes=0, hours=0):
+        self.throttle_period = timedelta(
+            seconds=seconds, minutes=minutes, hours=hours
+        )
+        self.time_of_last_call = datetime.min
+
+    def __call__(self, fn):
+        @wraps(fn)
+        def wrapper(*args, **kwargs):
+            now = datetime.now()
+            time_since_last_call = now - self.time_of_last_call
+
+            if time_since_last_call > self.throttle_period:
+                self.time_of_last_call = now
+                return fn(*args, **kwargs)
+
+        return wrapper
+
+def compare(symbol, val1, val2):
+    if symbol == '>':
+        return val1 > val2
+    elif symbol == '>=':
+        return val1 >= val2
+    elif symbol == '<':
+        return val1 < val2
+    elif symbol == '<=':
+        return val1 <= val2
+    elif symbol == '=':
+        return val1 == val2
+    return False
+
+@Throttle(minutes=1)
+def do_action(action, sensor_value, warning_value):
+    logging.debug('Executing action {action} sensor value {sensor} and warning value {warning}'.format(action=action, sensor=sensor_value, warning=warning_value))
+    message = 'Warning bla'
+    if action == 'mail':
+        send_mail('aWarehouse warning', message)
+    elif action == 'sms':
+        send_sms(message)
+
+def check_alerts(conf, sensors):
+    logging.debug('Checking alerts')
+    for w in conf['warnings']:
+        action = w['action']
+        op = w['op']
+        sensor_value = w['value']
+        warning_value = get_warning_value(sensors, w['type'])
+        logging.debug('Checking alerts action {action} {sensor} {op} {warning}'.format(action=action, sensor=sensor_value, op=op, warning=warning_value))
+        if warning_value is None:
+            continue
+        if compare(op, sensor_value, warning_value):
+            do_action(action, sensor_value, warning_value)
+
+
+def get_warning_value(sensors, type):
+    names = {
+        'temperature': ['sensors', 'temp1'],
+        'humidity': ['sensors', 'humidity'],
+        'brightness': ['sensors', 'light_sensor'],
+        'heat': ['sensors', 'heat_index'],
+        'sound': ['sensors_fast', 'sound']
+    }
+    for sensor in sensors:
+        if sensor['name'] == names[type][0]:
+            return sensor['points'][0][sensor['columns'].index(names[type][1])]
+    return None
 
 
 def load_file():
@@ -132,6 +211,8 @@ def get_sensors():
         influxdb.write_points(m)
     except:
         print "Unexpected error InfluxDB:", sys.exc_info()
+
+    check_alerts(config, m)
 
 get_sensors.counter = 0
 

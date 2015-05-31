@@ -1,12 +1,8 @@
 {
   "warnings": [{
-    "action": "...",
+    "action": "sms",
     "type": "temperature",
-    "value": 30.5,
-    "op": ">="
-  }, {
-    "type": "humidity",
-    "value": 30.5,
+    "value": 20,
     "op": ">="
   }],
   "twilio": {
