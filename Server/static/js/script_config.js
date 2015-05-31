@@ -5,7 +5,7 @@ $.getJSON("/api/config", function(data) {
   loadData = data;
   for (var key in data) {
     for (var keyCode in data[key]) {
-      var sel = "#" + keyCode + "";
+      var sel = "#" + key + "-" + keyCode + "";
       $(sel).val(data[key][keyCode]);
     }
   }
@@ -14,7 +14,7 @@ $.getJSON("/api/config", function(data) {
 $("#submit").on("click", function() {
   for (var key in loadData) {
     for (var keyCode in loadData[key]) {
-      var sel = "#" + keyCode + "";
+      var sel = "#" + key + "-" + keyCode + "";
       var value = $(sel).val();
       if (!isNaN(value)){
         value = Number(value);
