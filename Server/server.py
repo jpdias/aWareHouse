@@ -67,7 +67,9 @@ class Throttle(object):
 
 
 def compare(op, val1, val2):
-    if op == '>':
+    if val1 is None or val2 is None:
+        return False
+    elif op == '>':
         return val1 > val2
     elif op == '>=':
         return val1 >= val2
