@@ -9,6 +9,18 @@ $.getJSON("/api/config", function(data) {
       $(sel).val(data[key][keyCode]);
     }
   }
+  
+  data.warnings.forEach(function(warning, i) {
+    if (i != 0) {
+      $(".warning")[0].clone(true, true).insertAfter(".warning:last");
+    }
+    var lastWarning = $(".warning:last");
+    for (var key in warning) {
+      if (key.hasOwnProperty(warning)) {
+        lastWarning.find("[name=" + key +"]").val(warning[key]);
+      }
+    }
+  });
 });
 
 $("#submit").on("click", function() {
