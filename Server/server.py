@@ -230,7 +230,7 @@ def get_sensors():
     try:
         influxdb.write_points(m)
     except:
-        print "Unexpected error InfluxDB:", sys.exc_info()
+        logging.exception('Unexpected error InfluxDB')
 
     check_alerts(config, m)
 
@@ -245,7 +245,7 @@ def get_meteo():
         temp = forecast.currently().temperature
         humi = forecast.currently().humidity * 100
     except:
-        print "Unexpected error Forecast.io:", sys.exc_info()
+        logging.exception('Unexpected error Forecast.io')
     else:
         global current_forecast
         current_forecast = {
