@@ -109,12 +109,13 @@ def check_alerts(conf, sensors):
         action = w['action']
         op = w['op']
         warning_value = w['value']
-        sensor_value = get_warning_value(sensors, w['type'])
+        type = w['type']
+        sensor_value = get_warning_value(sensors, type)
         logging.debug('Checking alerts action {action} {sensor} {op} {warning}'.format(action=action, sensor=sensor_value, op=op, warning=warning_value))
         if warning_value is None:
             continue
         if compare(op, sensor_value, warning_value):
-            do_action(action, sensor_value, warning_value)
+            do_action(action, type, op, sensor_value, warning_value)
 
 
 def get_warning_value(sensors, type):
