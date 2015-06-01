@@ -10,7 +10,7 @@ import schedule
 import forecastio
 import mandrill
 from flask import Flask, request, jsonify
-from influxdb import InfluxDBClient
+from influxdb.influxdb08 import InfluxDBClient
 from twilio.rest import TwilioRestClient
 
 try:
