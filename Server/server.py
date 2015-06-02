@@ -127,7 +127,7 @@ def check_alerts(conf, sensors):
         if warning_value is None:
             continue
         if compare(op, sensor_value, warning_value):
-            do_action(action, type, op, sensor_value, warning_value)
+            do_action(action, sensor_type, op, sensor_value, warning_value)
 
 
 def get_sensor_value(sensors, sensor_type):
