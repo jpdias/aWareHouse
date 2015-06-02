@@ -1,4 +1,5 @@
 Server/venv
+Server/env
 nohup.out
 
 .idea
