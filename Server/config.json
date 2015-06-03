@@ -3,7 +3,7 @@
         {
             "action": "sms", 
             "type": "temperature", 
-            "value": 40, 
+            "value": 35, 
             "op": ">"
         }, 
         {
@@ -17,6 +17,12 @@
             "type": "brightness", 
             "value": 10, 
             "op": "<="
+        }, 
+        {
+            "action": "sms", 
+            "type": "temperature", 
+            "value": 20, 
+            "op": ">="
         }
     ], 
     "arduino": {
@@ -45,7 +51,7 @@
         "long": -8.6104
     }, 
     "twilio": {
-        "to": "+351963420589", 
+        "to": 351963420589, 
         "token": "3286cdb06fe619c2e5b0370c11c7b36e", 
         "from": 13522890122, 
         "sid": "ACb1dd53fb177436f10cf05b4f772a262f"

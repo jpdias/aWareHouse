@@ -162,7 +162,7 @@ def load_file():
 
 def send_sms(content):
     client.messages.create(
-        to=config['twilio']['to'],
+        to='+' + str(config['twilio']['to']),
         from_=config['twilio']['from'],
         body=content,
     )
