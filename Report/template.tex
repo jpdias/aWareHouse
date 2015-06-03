@@ -50,11 +50,11 @@ João Pedro Matos Teixeira Dias - 201106781 (ei11137@fe.up.pt)\\
 \newpage
 \section*{Abstract}
 
-We are in the rise of IoT (Internet of things). A world where everything is connected and we can, with simple tools, monitor and control everything. In this context, there is a lot of space for a more recurrent use of different programming paradigms because of the need of interaction with different layers of system architecture for a single application, since hardware to web.
+We are in the rise of IoT (Internet of Things). A world where everything is connected and we can, with simple tools, monitor and control everything. In this context, there is a lot of room to a more recurrent use of different programming paradigms: from the hardware to the cloud, there is a need to interact with many different layers of system architecture for a single application.
 
 Our application, \textit{aWareHouse}, was designed with the objective of, with a simple interface, we can monitor a house or a warehouse in terms of environment conditions (temperature, humidity, sound and luminosity). 
 
-For accomplishing this was used a combination of hardware/software and some different programming languages, in a way that gave us a stable application that can be used for setting a alarm system when occurs changes in our environment, for taking decisions analysing the past conditions and the relations with external (meteorological) conditions or simple look at the current conditions inside our warehouse.
+To accomplish this we used a combination of hardware/software and different programming languages, in a way that gave us a robust application that can be used to configure a warning system when there are changes in the environment, to take decisions analysing the past conditions and the relations with external (meteorological) conditions or simply to monitor the current conditions inside our warehouse.
 
 
 \newpage
@@ -67,15 +67,15 @@ For accomplishing this was used a combination of hardware/software and some diff
 
 \chapter{Introduction}
 
-The \textit{aWareHouse} project was developed for the Programming Paradigms course unit of the Master in Informatics and Computing Engineering at FEUP. The project was developed with the objective of combine, at least, three programming paradigms in the same application.
+The \textit{aWareHouse} project was developed for the Programming Paradigms course unit of the Master in Informatics and Computing Engineering at FEUP. The project was developed with the objective of combining, at least, three programming paradigms in the same application.
 
 The base motivation for this project was the Internet of Things, as defined by \textit{Gartner}:
 
 \blockquote{The Internet of Things (IoT) is the network of physical objects that contain embedded technology to communicate and sense or interact with their internal states or the external environment.}
 
-So, we designed a low cost system capable of giving the user the possibility of, using a relative small hardware box, monitor the environment of a given place like a house or warehouse. This, associated with a system capable of maintain records of the past conditions of the environment (plus external weather conditions), results in one application that gives the user the capacity of making decisions, be aware of the environment status using alerts and see the current conditions.
+To achieve this we designed a low cost system capable of giving the user the possibility of, using a relative small hardware box, monitor the environment of a given place like a house or warehouse. This, associated with a system capable of maintain records of the past conditions of the environment (plus external weather conditions), results in one application that gives the user the capacity of making decisions, be aware of the environment status using alerts and see the current conditions.
 
-As explained before the capabilities of this application make this a system useful in a lot of situations, for example, the monitoring of a warehouse and verify the relation between weather and internal conditions to make decision on what is the best settings for a refrigeration system and assure that the, for example, temperature is always below the maximum recommended. Other example is simple use it as a house control system and, for example, verify if someone forgot to turn any light off.
+As explained before, the capabilities of this application is a system useful in a lot of situations, e.g. the monitoring of a warehouse and verifying the relation between weather and internal conditions to make decision on what is the best settings for a refrigeration system and assure that the, for example, temperature is always below the maximum recommended. Another example is simple use it as a house control system and, for example, verify if someone forgot to turn any light off.
 
 \newpage
 \chapter{System Description}
@@ -89,10 +89,10 @@ As explained before the capabilities of this application make this a system usef
     \label{fig:use}
 \end{figure}
 
-The \textit{aWarehouse} application consist in a system that scans the environment of the room where the sensors are placed and stores all the information about it on a database.
+The \textit{aWarehouse} application consists in a system that scans the environment of the room where the sensors are placed and stores all the information about it on a time series database.
 
 The system can read temperature, humidity, sound and luminosity values as described in \ref{fig:use}. Additionally user can define maximum and minimum values so the system will alert whenever an environment factor exceeds this range.
-This way the user can have absolute control of the room where \textit{aWarehouse} is installed. This application can be very useful in a server room, with the temperature sensor the user can control the room temperature and prevent an overheating. With the sound sensor the user knows if someone is in the room and with the luminosity sensor the user can check if,for example, a door is open.
+This way the user can have absolute control of the room where \textit{aWarehouse} is installed. This application can be very useful in a server room, with the temperature sensor the user can control the room temperature and prevent an overheating. With the sound sensor the user knows if someone is in the room and with the luminosity sensor the user can check if someone forgot to turn off the lights.
 
 
 
@@ -165,24 +165,24 @@ The design is based around a Broadcom BCM2835 SoC, which includes an ARM1176JZF-
     \label{fig:arc}
 \end{figure}
 
-The application base logic architecture, as presented in fig. \ref{fig:arc}, is divided in three principal layers, the low-level layer were the sensors are controlled, the back-end layer were is managed all the data and services, and the front-end layer that is basically the client web application.
+The application base logic architecture, as presented in fig. \ref{fig:arc}, is divided in three principal layers, the low-level layer were the sensors are controlled, the back-end layer were all the data and services are managed, and the front-end layer which is dashboard web application.
 
-Although the Raspberry Pi have a GPIO port (General Purpose Input/Output) capable of interact with the sensors we used, we opted for using a separated controller, an Arduino, for doing that. This is motivated by the need of a real-time system on reading the sensors and there's too much running in Linux to get that kind of accuracy. The Linux kernel dispatcher isn't made to support real-time since there's a massive number of tasks that you simply can't run without.
+Although the Raspberry Pi has a GPIO port (General Purpose Input/Output) capable of interact with the sensors we used, we opted for using a separated controller, an Arduino, for doing that. This is motivated by the need of a real-time system on reading the sensors and there's too much running in Linux to get that kind of accuracy. The Linux kernel dispatcher isn't made to support real-time since there's a massive number of tasks that you simply can't run without.
 
 \subsection{Programming Languages and Technologies}
 
-In the context of realizing this project it was conciliated a diversity of technologies and programming languages that, working together in the architecture presented at fig. \ref{fig:arc}, made the application possible. Starting by enumerating the programming languages used and the reasons for choosing those languages are the following.
+In the context of realizing this project we conciliated a diversity of technologies and programming languages that, working together in the architecture presented at fig. \ref{fig:arc}, made the application possible. Starting by enumerating the programming languages used and the reasons for choosing those languages are the following.
 \begin{itemize}
 \item Arduino Language\cite{arduinolang} is a low level language based on C/C++ and integrated with AVR Libc\cite{avr} and allows the use of any of its functions for interacting with hardware. Since its a derivative language of C/C++ it has a multi-paradigm design being imperative and object-oriented. The version used is v1.6.4. 
 \begin{itemize}
-\item DHT Sensor Library\cite{dhtada} is an Arduino library for the DHT series of low cost temperature/humidity sensors that facilitates the reading of values from this sensors.
+\item DHT Sensor Library\cite{dhtada} is an Arduino library for the DHT series of low cost temperature/humidity sensors that facilitates the reading of values from these sensors.
 \item OneWire Library\cite{pjrc} is used to access 1-wire devices made by Maxim/Dallas, such as temperature sensors. For temperature sensors, witch is our case, the DallasTemperature\cite{dallas} library can be used with this library.
 \end{itemize}
 \item Python Language\cite{pylang} is a general-purpose, high-level programming language. Python supports multiple programming paradigms, including object-oriented, imperative and functional programming. It features a dynamic type system and automatic memory management and has a large and comprehensive standard library. The version used is v2.7.9.
 \begin{itemize}
 \item Flask Library\cite{flask} is a micro web application framework for creating simple web RESTful applications.
-\item Schedule Library\cite{schedule} make possible to run Python functions (or any other callable) periodically at pre-determined intervals using a simple, human-friendly syntax.
-\item pySerial Libray\cite{pyserial} facilitates the use of serial port communication in Pyhton applications.
+\item Schedule Library\cite{schedule} makes possible to run Python functions (or any other callable) periodically at pre-determined intervals using a simple, human-friendly syntax.
+\item pySerial Libray\cite{pyserial} facilitates the use of serial port communication in Python applications.
 \end{itemize}
 \item Web Languages\cite{moz} are a set of languages that are interpreted by a browser in a rendering process to present the content on a browser screen. 
 \begin{itemize}
@@ -218,27 +218,27 @@ In addiction to the programming languages we used a set of technologies as a par
 
 \subsection{Implementation Details}
 
-This project had the need of using and establishing a diversity of API's (Application Programming Interface) for communication between the different application layers and external services used.
+This project had the need of using and establishing a diversity of APIs (Application Programming Interface) for communicating between the different application layers and external services.
 
-On one hand, we used various RESTful API for accessing external services (Mandrill\cite{mandrillapi},Forecast.io\cite{fcapi} and Twilio\cite{twilioapi}) as refereed in table \ref{tab:tech}. The RESTful stands for Representational State Transfer, that consists in using the standard HTTP operations for communication data in JSON or XML format. In our case, the external services used can communicate using JSON (JavaScript Object Notation) messages for requesting and pushing data.
+On one hand, we used various RESTful API for accessing external services (Mandrill\cite{mandrillapi}, Forecast.io\cite{fcapi} and Twilio\cite{twilioapi}) as refereed in table \ref{tab:tech}. The RESTful stands for Representational State Transfer, that consists in using the standard HTTP operations for communication data in JSON or XML format. In our case, the external services used can communicate using JSON (JavaScript Object Notation) messages for requesting and pushing data.
 
 Additionally we standardize a REST API for communicating with the Python server from our web application.
 
-On other hand, for establishing communication between the Python server and the Arduino we needed to use Serial Port communication using the Arduino serial port\cite{serial}, and a Python library called \textit{pySerial}\cite{pyserial}. For this we standardized a system of request/response were we passed a character that expressed the operation wanted and the Arduino responded using a JSON string with the values requested. The serial port communication is emulated above an USB port.
+On the other hand, for establishing communication between the Python server and the Arduino we used the Serial Port communication using the Arduino serial port\cite{serial}, and a Python library called \textit{pySerial}\cite{pyserial}. For this we standardized a system of request/response were we passed a character that expressed the operation wanted and the Arduino responded using a JSON string with the values requested. The serial port communication is emulated above an USB port.
 
 
 
 \subsection{Development Environment}
 
-The development environment used depended on the layer that we where working, because different languages/technologies required different environments.
+The development environment used depended on the layer that we were working, because different languages/technologies required different environments.
 
-For developing the low level hardware phase, using the Arduino platform, we needed to use the Arduino Software (IDE)\cite{arduinoide}, that compiles the Arduino code, checked for errors and upload it to the Arduino Board.
+For developing the low level hardware phase, using the Arduino platform, we needed to use the Arduino Software (IDE)\cite{arduinoide}, that compiles the Arduino code, checks for errors and uploads it to the Arduino Board.
 
-When developing the Python server application we need to use the Python compiler for analysing Python source code and generating Python bytecode, and the Python IDLE that is the Python IDE built with the Tkinter GUI toolkit. Beside this, when deploying the Python server code on the Raspberry Pi we used  SSH (Secure Shell) to connect with it and, by this way, initiating text-based shell session on the remote machines in a secure way, allowing us to run commands on the machine prompt without the need of being physically present near to the machine.
+When developing the Python server application we used the Python compiler for analysing Python source code and generating Python bytecode, and the Python IDLE that is the Python IDE built with the Tkinter GUI toolkit. Beside this, when deploying the Python server code on the Raspberry Pi we used  SSH (Secure Shell) to connect with it and initiating text-based shell session on the remote machines in a secure way, allowing us to run commands on the machine prompt without the need of being physically present near to the machine.
 
-Another tool that we needed was the Go language compiler (v1.4) because we used InfluxDB, that is written in Go Lang\cite{goinflux}, and we needed to compile it for ARM processor (Raspberry Pi processor architecture).
+Another tool that we needed was the Go language compiler (v1.4) since we used InfluxDB which is written in Go Lang\cite{goinflux}, and we needed to compile it for ARM processor (Raspberry Pi processor architecture).
 
-For developing the client web application and extending the Grafana we used a text editor, more specifically, Visual Studio Code.
+For developing the client web application and extending the Grafana we used a text editor.
 
 Additionally we used Git control version system for sharing/working with code between the members of the working team associated with the GitHub free repository system for students.
 
@@ -249,22 +249,22 @@ The \textit{aWareHouse} project was designed to take advantage of different prog
 
 In a way of summary, we used low-level programming for Arduino and sensors, taking advantages of imperative paradigm. For the server that communicates with the web application and the Arduino we used Python that is a multi-paradigm language (object-oriented, imperative and functional). For the web application itself we used the standard web technologies (JavaScript, HTML and CSS). JavaScript, principally, is know for being another multi-paradigm language (scripting, object-oriented with prototypes, imperative and functional).
 
-The actual result was a solution that can easily adapted for the market with a relative good precision, trustability and stability. Additionally it is easy adaptable and/or extendible with new functionalities (sensors for example).
+The actual result was a solution that can easily adapted for the market with a relative good precision, trustability and stability. Additionally it is easy adaptable and/or extendible with new functionalities (e.g more sensors).
 
-This project fits in a time that we start to hear everyday more about \textit{Internet Of Things} and \textit{Big Data}, and the possibilities that this brings to us. We conciliated this two big thematics and give the user the power to watch and be aware of a warehouse or any confined space, and, at the same time, be capable of see the past data and the influence of external conditions in inside environment.
+This project fits in a time that we start to hear everyday more about \textit{Internet of Things} and \textit{Big Data}, and the possibilities that this brings to us. We conciliated this two big thematics and give the user the power to watch and be aware of a warehouse or any confined space, and, at the same time, be capable of see the past data and the influence of external conditions in inside environment.
 
 \newpage
 \chapter{Improvements}
 
-Although we think that \textit{aWareHouse} is almost ready to market at this stage we already found space for improvement and evolution, namely:
+Although we think that \textit{aWareHouse} is almost ready to market at this stage, we already found space for improvement and evolution, namely:
 \begin{itemize}
  \item Addition of more and basic sensors like, for example, a motion sensor.
- \item The storage system has to be improved since that with the accumulation of past data the system can be really slow.
- \item Possibility of integrate some automatic advice system, using artificial intelligence, that provides the user advices on what to change to make the environment more cold for example.
- \item Improve the security of application creating user accounts and better data protection.
+ \item The storage system has to be improved because it slows down with the  accumulation of past data.
+ \item Possibility to integrate some automatic advice system, using artificial intelligence, that provides the user advices on what to change to achieve certain goals (e.g colder rooms, reduce eletrical costs, etc.).
+ \item Improve the security of application by restricting access and better data protection.
 \end{itemize} 
 
-We see this points as growing space, and possibility of make a better application for the final user.
+We see this points as growing space, and possibility to make a better application for the final user.
 
 \renewcommand\bibname{References}
 \begin{thebibliography}{}
