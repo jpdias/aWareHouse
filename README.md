@@ -1,6 +1,6 @@
 ### aWareHouse
 
-We are in the rise of IoT (Internet of Things). A world where everything is connected and we can, with simple tools, monitor and control everything. In this context, there is a lot of room to a more recurrent use of dierent programming paradigms: from the hardware to the cloud, there is a need to interact with many dierent layers of system architecture for a single application.
+We are in the rise of IoT (Internet of Things). A world where everything is connected and we can, with simple tools, monitor and control everything. In this context, there is a lot of room to a more recurrent use of diferent programming paradigms: from the hardware to the cloud, there is a need to interact with many diferent layers of system architecture for a single application.
 
 This application, aWareHouse, was designed with the objective of, with a simple interface, we can monitor a house or a warehouse in terms of environment conditions (temperature, humidity, sound and luminosity).
 
@@ -23,18 +23,18 @@ An open-source distributed time series database.
     - DHT11 (Temperature / Humidity)
     - DS18B20 (Temperature)
     - LM393 (Sound level)
-    - Diffused LED
+    - Diffused LED
     - Photo cell / Photoresistor
     - Some resistors
     - Wires
     
-[Circuit example](http://i.imgur.com/VbYlxQS.png)
+![Circuit example](http://i.imgur.com/VbYlxQS.png)
     
 ### Screenshots
 
-[Dashboard](http://i.imgur.com/PWtn9HJ.png)
+![Dashboard](http://i.imgur.com/PWtn9HJ.png)
 
-[Configuration Dashboard](http://i.imgur.com/OEHvK1U.png)
+![Configuration Dashboard](http://i.imgur.com/OEHvK1U.png)
 
 ### Authors
 
