@@ -1,64 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Awarehouse by jpdias</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>aWareHouse by jpdias</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Awarehouse</h1>
-        <p>Control System for Servers WareHouses</p>
 
-        <p class="view"><a href="https://github.com/jpdias/aWareHouse">View the Project on GitHub <small>jpdias/aWareHouse</small></a></p>
+    <header>
+      <div class="container">
+        <h1>aWareHouse</h1>
+        <h2>Environment Control System</h2>
 
+        <section id="downloads">
+          <a href="https://github.com/jpdias/aWareHouse/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/jpdias/aWareHouse/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/jpdias/aWareHouse" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
-        <ul>
-          <li><a href="https://github.com/jpdias/aWareHouse/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/jpdias/aWareHouse/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/jpdias/aWareHouse">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+    <div class="container">
+      <section id="main_content">
         <h3>
 <a id="awarehouse" class="anchor" href="#awarehouse" aria-hidden="true"><span class="octicon octicon-link"></span></a>aWareHouse</h3>
 
-<p>Control System for Servers WareHouses</p>
+<p>We are in the rise of IoT (Internet of Things). A world where everything is connected and we can, with simple tools, monitor and control everything. In this context, there is a lot of room to a more recurrent use of diferent programming paradigms: from the hardware to the cloud, there is a need to interact with many diferent layers of system architecture for a single application.</p>
 
-<h2>
-<a id="schematics" class="anchor" href="#schematics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schematics</h2>
+<p>This application, aWareHouse, was designed with the objective of, with a simple interface, we can monitor a house or a warehouse in terms of environment conditions (temperature, humidity, sound and luminosity).</p>
 
-<p><img src="http://i.imgur.com/x9MYzyS.png" alt="Schematic"></p>
+<p>To accomplish this it's used a combination of hardware/software and different programming languages, in a way that gave us a robust application that can be used to configure a warning system when there are changes in the environment, to take decisions analyzing the past conditions and the relations with external (meteorological) conditions or simply to monitor the current conditions inside our warehouse.</p>
 
-<h2>
-<a id="ideas" class="anchor" href="#ideas" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ideas</h2>
-
-<ul>
-<li>Register data read from the sensors and store it in a MySQL DB in a cron jobs (periodically).
+<h3>
+<a id="software-dependencies" class="anchor" href="#software-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Software Dependencies</h3>
 
 <ul>
-<li>Temperature</li>
-<li>Luminosity (LED)</li>
-<li>Sound</li>
-<li>Humidity</li>
-<li>Motion Sensor (Sonar)</li>
+<li>
+<p><a href="https://influxdb.com/">InfluxDB</a>
+An open-source distributed time series database.</p>
+
+<ul>
+<li>For installing it on Raspberry Pi (ARM processor) follow this <a href="http://www.pihomeserver.fr/en/2014/11/29/raspberry-pi-home-server-installer-influxdb/">tutorial</a>
+</li>
 </ul>
 </li>
-<li>Show alerts in a LED Screen.</li>
-<li>Configure warning levels.</li>
-<li>Web App showing info in a graphical way.</li>
+<li>
+<p><a href="https://www.python.org/downloads/">Python 2.7.x</a></p>
+
+<ul>
+<li>The additional requirements are in <code>Server\requirements.txt</code> file and can be installed using <code>pip install -r requirements.txt</code>
+</li>
+</ul>
+</li>
 </ul>
 
-<h2>
-<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h2>
+<h3>
+<a id="hardware-dependencies" class="anchor" href="#hardware-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hardware Dependencies</h3>
+
+<ul>
+<li>Linux based machine (in this case was used an Raspberry Pi 1 model B)</li>
+<li>Arduino (in this case was used an Arduino Nano)
+
+<ul>
+<li>Breadboard</li>
+<li>DHT11 (Temperature / Humidity)</li>
+<li>DS18B20 (Temperature)</li>
+<li>LM393 (Sound level)</li>
+<li>Diffused LED</li>
+<li>Photo cell / Photoresistor</li>
+<li>Some resistors</li>
+<li>Wires</li>
+</ul>
+</li>
+</ul>
+
+<p><img src="http://i.imgur.com/VbYlxQS.png" alt="Circuit example"></p>
+
+<h3>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots</h3>
+
+<p><img src="http://i.imgur.com/PWtn9HJ.png" alt="Dashboard"></p>
+
+<p><img src="http://i.imgur.com/OEHvK1U.png" alt="Configuration Dashboard"></p>
+
+<h3>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h3>
 
 <ul>
 <li>
@@ -69,12 +101,8 @@
 <a href="http://github.com/jpdias">João Pedro Dias</a> </li>
 </ul>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/jpdias">jpdias</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
   </body>
 </html>
