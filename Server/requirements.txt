@@ -1,5 +1,5 @@
 docopt==0.4.0
-Flask==0.10.1
+Flask==1.0
 Flask-Cors==2.0.1
 httplib2==0.9.1
 influxdb==2.3.0
