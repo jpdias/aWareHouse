@@ -4,7 +4,7 @@ Flask-Cors==2.0.1
 httplib2==0.9.1
 influxdb==2.3.0
 itsdangerous==0.24
-Jinja2==2.7.3
+Jinja2==2.10.3
 logging==0.4.9.6
 mandrill==1.0.57
 MarkupSafe==0.23
